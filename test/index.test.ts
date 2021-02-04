@@ -5,7 +5,14 @@ import {mocked} from 'ts-jest/utils';
 
 const mockFetch = mocked(fetch);
 
-import {GetConsent, GetFullConfiguration, GetLocation, InvokeRight, SetConsent} from "../src";
+import {
+  GetBootstrapConfiguration,
+  GetConsent,
+  GetFullConfiguration,
+  GetLocation,
+  InvokeRight,
+  SetConsent
+} from "../src";
 
 describe('@ketch-com/ketch-web-api', () => {
   describe('GetLocation', () => {
@@ -19,6 +26,23 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(GetLocation({
         IP: '1.2.3.5',
+      })).resolves.toBe(v);
+
+      expect(mockFetch).toBeCalled();
+    });
+  });
+
+  describe('GetBootstrapConfiguration', () => {
+    it('calls service', () => {
+      const v = {
+        language: 'en-US',
+        regulations: ['gdpr'],
+      };
+      mockFetch.mockResolvedValue(v);
+
+      expect(GetBootstrapConfiguration({
+        organizationCode: 'switchbitcorp',
+        appCode: 'switchbit',
       })).resolves.toBe(v);
 
       expect(mockFetch).toBeCalled();

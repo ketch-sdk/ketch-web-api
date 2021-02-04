@@ -5,6 +5,7 @@
   "main": "dist/ketch-web-api.js",
   "module": "dist/ketch-web-api.esm.js",
   "jsnext:main": "dist/ketch-web-api.esm.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "npx rollup -c"
