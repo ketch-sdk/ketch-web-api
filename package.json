@@ -1,5 +1,5 @@
 {
-  "name": "@ketch-com/ketch-web-api",
+  "name": "@ketch-sdk/ketch-web-api",
   "version": "0.0.1",
   "description": "Ketch TypeScript/JavaScript Web API",
   "main": "dist/ketch-web-api.js",
