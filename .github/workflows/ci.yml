@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+      TRANSOM_URL: ${{ secrets.TRANSOM_URL }}
+      TRANSOM_TOKEN: ${{ secrets.TRANSOM_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: v1-node-dep-${{ hashFiles('package-lock.json') }}
+        restore-keys: v1-node-dep-
+    - run: |
+        echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+        echo "@ketch-com:registry=https://npm.pkg.github.com/" >> .npmrc
+        echo "always-auth=true" >> .npmrc
+    - uses: winchci/actions-node@v13

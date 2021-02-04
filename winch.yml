@@ -1,0 +1,9 @@
+name: ketch-web-api
+description: Ketch TypeScript/JavaScript ES Module for the Ketch Web API
+repository: https://github.com/ketch-sdk/ketch-web-api
+verbose: true
+language: node
+toolchain: npm
+release:
+  branches:
+    only: main
