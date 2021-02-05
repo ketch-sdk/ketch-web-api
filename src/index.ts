@@ -2,17 +2,17 @@ import fetch from "./lib/fetch";
 
 const baseUrl = 'https://global.ketchcdn.com/web/v1';
 
-enum ExperienceDefault {
+export enum ExperienceDefault {
   BANNER = 1,
   MODAL,
 }
 
-enum ExperienceButtonDestination {
+export enum ExperienceButtonDestination {
   GOTO_MODAL = 1,
   GOTO_PREFERENCE,
 }
 
-enum MigrationOption {
+export enum MigrationOption {
   MIGRATE_DEFAULT,
   MIGRATE_NEVER,
   MIGRATE_FROM_ALLOW,
@@ -20,17 +20,17 @@ enum MigrationOption {
   MIGRATE_ALWAYS,
 }
 
-enum CookieDuration {
+export enum CookieDuration {
   SESSION = 1,
   PERSISTENT,
 }
 
-enum CookieProvenance {
+export enum CookieProvenance {
   FIRST_PARTY = 1,
   THIRD_PARTY,
 }
 
-enum CookieCategory {
+export enum CookieCategory {
   STRICTLY_NECESSARY = 1,
   FUNCTIONAL,
   PERFORMANCE,
@@ -47,13 +47,13 @@ enum CookieCategory {
 //   error: Error;
 // }
 
-interface IPLanguage {
+export interface IPLanguage {
   code: string;
   name: string;
   native: string;
 }
 
-interface IPLocation {
+export interface IPLocation {
   geonameId: number;
   capital: string;
   languages: IPLanguage[];
@@ -64,7 +64,7 @@ interface IPLocation {
   isEU: boolean;
 }
 
-interface IPInfo {
+export interface IPInfo {
   ip: string;
   hostname: string;
   continentCode: string;
@@ -80,28 +80,28 @@ interface IPInfo {
   location: IPLocation;
 }
 
-interface GetLocationRequest {
+export interface GetLocationRequest {
   IP: string;
 }
 
-interface GetLocationResponse {
+export interface GetLocationResponse {
   location: IPInfo;
 }
 
-interface PurposeLegalBasis {
+export interface PurposeLegalBasis {
   legalBasisCode: string;
 }
 
-interface PurposeAllowed {
+export interface PurposeAllowed {
   allowed: string;
 }
 
-interface PurposeAllowedLegalBasis {
+export interface PurposeAllowedLegalBasis {
   allowed: string;
   legalBasisCode: string;
 }
 
-interface GetConsentRequest {
+export interface GetConsentRequest {
   organizationCode: string;
   controllerCode?: string;
   applicationCode: string;
@@ -110,11 +110,11 @@ interface GetConsentRequest {
   purposes: {[key: string]: PurposeLegalBasis};
 }
 
-interface GetConsentResponse {
+export interface GetConsentResponse {
   purposes: {[key: string]: PurposeAllowed};
 }
 
-interface SetConsentRequest {
+export interface SetConsentRequest {
   organizationCode: string;
   controllerCode?: string;
   applicationCode: string;
@@ -126,7 +126,7 @@ interface SetConsentRequest {
   purposes: {[key: string]: PurposeAllowedLegalBasis};
 }
 
-interface User {
+export interface User {
   email: string;
   first: string;
   last: string;
@@ -135,7 +135,7 @@ interface User {
   description: string;
 }
 
-interface InvokeRightRequest {
+export interface InvokeRightRequest {
   organizationCode: string;
   controllerCode?: string;
   applicationCode: string;
@@ -147,12 +147,12 @@ interface InvokeRightRequest {
   user: User;
 }
 
-interface GetBootstrapConfigurationRequest {
+export interface GetBootstrapConfigurationRequest {
   organizationCode: string;
   appCode: string;
 }
 
-interface GetFullConfigurationRequest {
+export interface GetFullConfigurationRequest {
   organizationCode: string;
   appCode: string;
   envCode: string;
@@ -162,35 +162,35 @@ interface GetFullConfigurationRequest {
   languageCode: string;
 }
 
-interface Organization {
+export interface Organization {
   code?: string;
 }
 
-interface PolicyScopeInfo {
+export interface PolicyScopeInfo {
   code?: string;
   defaultScopeCode?: string;
   variable?: string;
   scopes?: {[key: string]: string};
 }
 
-interface Application {
+export interface Application {
   code?: string;
   name?: string;
   platform?: string;
 }
 
-interface Environment {
+export interface Environment {
   code: string;
   pattern?: string;
   hash?: string;
 }
 
-interface Deployment {
+export interface Deployment {
   code: string;
   version: number;
 }
 
-interface Cookie {
+export interface Cookie {
   name: string;
   code: string;
   host: string;
@@ -203,7 +203,7 @@ interface Cookie {
   version: number;
 }
 
-interface Purpose {
+export interface Purpose {
   code: string;
   name?: string;
   description?: string;
@@ -214,18 +214,18 @@ interface Purpose {
   cookies: Cookie[];
 }
 
-interface Identity {
+export interface Identity {
   type: string;
   variable: string;
 }
 
-interface PolicyDocument {
+export interface PolicyDocument {
   code: string;
   version: number;
   url: string;
 }
 
-interface Banner {
+export interface Banner {
   title: string;
   footerDescription: string;
   agreement: string;
@@ -234,7 +234,7 @@ interface Banner {
   secondaryButtonDestination: ExperienceButtonDestination;
 }
 
-interface Modal {
+export interface Modal {
   title: string;
   bodyTitle: string;
   bodyDescription: string;
@@ -243,7 +243,7 @@ interface Modal {
   buttonText: string;
 }
 
-interface JIT {
+export interface JIT {
   title: string;
   bodyDescription: string;
   acceptButtonText: string;
@@ -252,7 +252,7 @@ interface JIT {
   moreInfoDestination: ExperienceButtonDestination;
 }
 
-interface RightsTab {
+export interface RightsTab {
   tabName: string;
   bodyTitle: string;
   bodyDescription: string;
@@ -260,7 +260,7 @@ interface RightsTab {
   agreement: string;
 }
 
-interface ConsentsTab {
+export interface ConsentsTab {
   tabName: string;
   bodyTitle: string;
   bodyDescription: string;
@@ -268,13 +268,13 @@ interface ConsentsTab {
   agreement: string;
 }
 
-interface OverviewTab {
+export interface OverviewTab {
   tabName: string;
   bodyTitle: string;
   bodyDescription: string;
 }
 
-interface ConsentExperience {
+export interface ConsentExperience {
   code: string;
   version: number;
   banner: Banner;
@@ -283,7 +283,7 @@ interface ConsentExperience {
   experienceDefault: ExperienceDefault;
 }
 
-interface PreferenceExperience {
+export interface PreferenceExperience {
   code: string;
   version: number;
   title: string;
@@ -292,18 +292,18 @@ interface PreferenceExperience {
   overview: OverviewTab;
 }
 
-interface Right {
+export interface Right {
   code: string;
   name: string;
   description: string;
 }
 
-interface Experience {
+export interface Experience {
   consent?: ConsentExperience;
   preference?: PreferenceExperience;
 }
 
-interface Theme {
+export interface Theme {
   code: string;
   name: string;
   description: string;
@@ -315,7 +315,7 @@ interface Theme {
   feedbackColor: string;
 }
 
-interface Configuration {
+export interface Configuration {
   language?: string;
   organization?: Organization;
   app?: Application;
