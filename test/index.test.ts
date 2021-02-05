@@ -6,12 +6,12 @@ import {mocked} from 'ts-jest/utils';
 const mockFetch = mocked(fetch);
 
 import {
-  GetBootstrapConfiguration,
-  GetConsent,
-  GetFullConfiguration,
-  GetLocation,
-  InvokeRight,
-  SetConsent
+  getBootstrapConfiguration,
+  getConsent,
+  getFullConfiguration,
+  getLocation,
+  invokeRight,
+  setConsent
 } from "../src";
 
 describe('@ketch-com/ketch-web-api', () => {
@@ -24,7 +24,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(GetLocation({
+      expect(getLocation({
         IP: '1.2.3.5',
       })).resolves.toBe(v);
 
@@ -40,7 +40,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(GetBootstrapConfiguration({
+      expect(getBootstrapConfiguration({
         organizationCode: 'switchbitcorp',
         appCode: 'switchbit',
       })).resolves.toBe(v);
@@ -57,7 +57,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(GetFullConfiguration({
+      expect(getFullConfiguration({
         organizationCode: 'switchbitcorp',
         appCode: 'switchbit',
         envCode: 'production',
@@ -82,7 +82,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(GetConsent({
+      expect(getConsent({
         organizationCode: 'switchbitcorp',
         applicationCode: 'switchbit',
         applicationEnvironmentCode: 'production',
@@ -117,7 +117,7 @@ describe('@ketch-com/ketch-web-api', () => {
     it('calls service', () => {
       mockFetch.mockResolvedValue(void(0));
 
-      expect(SetConsent({
+      expect(setConsent({
         organizationCode: 'switchbitcorp',
         applicationCode: 'switchbit',
         applicationEnvironmentCode: 'production',
@@ -160,7 +160,7 @@ describe('@ketch-com/ketch-web-api', () => {
     it('calls service', () => {
       mockFetch.mockResolvedValue(void(0));
 
-      expect(InvokeRight({
+      expect(invokeRight({
         organizationCode: 'switchbitcorp',
         "applicationCode":"switchbit",
         "applicationEnvironmentCode":"production",
