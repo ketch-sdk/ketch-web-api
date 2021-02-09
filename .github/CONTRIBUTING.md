@@ -8,7 +8,10 @@ Following these guidelines helps to communicate that you respect the time of the
 managing and developing this open source project. In return, they should reciprocate that
 respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
-Orlop is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Orlop itself. 
+This library is an open source project and we love to receive contributions from our community — you!
+There are many ways to contribute, from writing tutorials or blog posts, improving the documentation,
+submitting bug reports and feature requests or writing code which can be incorporated into this
+library itself.
 
 ### Using the issue tracker
 
@@ -99,9 +102,9 @@ If the answer to either of those two questions are "yes", then you're probably d
 
 ## How to suggest a feature or enhancement
 
-If you find yourself wishing for a feature that doesn't exist in Orlop, you are
+If you find yourself wishing for a feature that doesn't exist in this library, you are
 probably not alone. There are bound to be others out there with similar needs.
-Many of the features that Orlop has today have been added because our users saw
+Many of the features that this library has today have been added because our users saw
 the need. Open an issue on our issues list on GitHub which describes the feature
 you would like to see, why you need it, and how it should work.
 
@@ -152,8 +155,8 @@ Must be one of the following:
 The scope could be anything that helps specifying the scope (or feature) that is changing.
 
 Examples
-- fix(token): 
-- fix(vault): 
+- fix(token):
+- fix(vault):
 
 ##### Subject
 The subject contains a succinct description of the change:
