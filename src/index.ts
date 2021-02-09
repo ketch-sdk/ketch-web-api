@@ -1,4 +1,4 @@
-import fetch from "./lib/fetch";
+import fetch from './lib/fetch';
 
 const baseUrl = 'https://global.ketchcdn.com/web/v1';
 
@@ -211,7 +211,7 @@ export interface Purpose {
   requiresOptIn?: boolean;
   allowsOptOut?: boolean;
   requiresPrivacyPolicy?: boolean;
-  cookies: Cookie[];
+  cookies?: Cookie[];
 }
 
 export interface Identity {

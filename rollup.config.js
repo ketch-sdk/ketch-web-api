@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import ts from 'rollup-plugin-typescript2';
 import replace from '@rollup/plugin-replace';
 
@@ -10,6 +10,7 @@ const PLUGINS = [
   }),
   babel({
     extensions: ['.ts', '.js', '.tsx', '.jsx'],
+    babelHelpers: 'bundled',
   }),
   replace({
     _VERSION: JSON.stringify(pkg.version),
