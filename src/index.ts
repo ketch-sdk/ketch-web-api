@@ -107,6 +107,7 @@ export interface GetConsentRequest {
   applicationCode: string;
   applicationEnvironmentCode: string;
   identities: string[];
+  identityMap: Map<string,string>
   purposes: {[key: string]: PurposeLegalBasis};
 }
 
@@ -120,6 +121,7 @@ export interface SetConsentRequest {
   applicationCode: string;
   applicationEnvironmentCode: string;
   identities: string[];
+  identityMap: Map<string,string>
   collectedAt?: number;
   policyScopeCode: string;
   migrationOption: MigrationOption;
@@ -141,6 +143,7 @@ export interface InvokeRightRequest {
   applicationCode: string;
   applicationEnvironmentCode: string;
   identities: string[];
+  identityMap: Map<string,string>
   invokedAt?: number;
   policyScopeCode: string;
   rightCodes: string[];
