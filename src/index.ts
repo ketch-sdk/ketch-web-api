@@ -132,9 +132,9 @@ export interface User {
   email: string;
   first: string;
   last: string;
-  country: string;
-  stateRegion: string;
-  description: string;
+  country?: string;
+  stateRegion?: string;
+  description?: string;
 }
 
 export interface InvokeRightRequest {
