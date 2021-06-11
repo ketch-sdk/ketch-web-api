@@ -12,6 +12,11 @@ export enum ExperienceButtonDestination {
   GOTO_PREFERENCE,
 }
 
+export enum ExperiencePrimaryButtonAction {
+  SAVE_CURRENT_STATE = 1,
+  ACCEPT_ALL = 2,
+}
+
 export enum MigrationOption {
   MIGRATE_DEFAULT,
   MIGRATE_NEVER,
@@ -112,7 +117,7 @@ export interface GetConsentRequest {
 
 export interface GetConsentResponse {
   purposes: {[key: string]: PurposeAllowed};
-  vendors: string[]; // list of vendor ids for which the user has opted out
+  vendors?: string[]; // list of vendor ids for which the user has opted out
 }
 
 export interface SetConsentRequest {
@@ -125,7 +130,7 @@ export interface SetConsentRequest {
   policyScopeCode: string;
   migrationOption: MigrationOption;
   purposes: {[key: string]: PurposeAllowedLegalBasis};
-  vendors: string[]; // list of vendor ids for which the user has opted out
+  vendors?: string[]; // list of vendor ids for which the user has opted out
 }
 
 export interface User {
@@ -165,7 +170,7 @@ export interface GetFullConfigurationRequest {
 }
 
 export interface Organization {
-  code?: string;
+  code: string;
 }
 
 export interface PolicyScopeInfo {
@@ -228,51 +233,47 @@ export interface PolicyDocument {
 }
 
 export interface Banner {
-  title: string;
+  title?: string;
   footerDescription: string;
-  agreement: string;
   buttonText: string;
-  secondaryButtonText: string;
-  secondaryButtonDestination: ExperienceButtonDestination;
+  primaryButtonAction?: ExperiencePrimaryButtonAction
+  secondaryButtonText?: string
+  secondaryButtonDestination?: ExperienceButtonDestination
 }
 
 export interface Modal {
   title: string;
-  bodyTitle: string;
-  bodyDescription: string;
-  footerDescription: string;
-  agreement: string;
+  bodyTitle?: string;
+  bodyDescription?: string;
   buttonText: string;
 }
 
 export interface JIT {
-  title: string;
-  bodyDescription: string;
+  title?: string;
+  bodyDescription?: string;
   acceptButtonText: string;
   declineButtonText: string;
-  moreInfoText: string;
-  moreInfoDestination: ExperienceButtonDestination;
+  moreInfoText?: string;
+  moreInfoDestination?: ExperienceButtonDestination;
 }
 
 export interface RightsTab {
   tabName: string;
-  bodyTitle: string;
-  bodyDescription: string;
+  bodyTitle?: string;
+  bodyDescription?: string;
   buttonText: string;
-  agreement: string;
 }
 
 export interface ConsentsTab {
   tabName: string;
-  bodyTitle: string;
-  bodyDescription: string;
+  bodyTitle?: string;
+  bodyDescription?: string;
   buttonText: string;
-  agreement: string;
 }
 
 export interface OverviewTab {
   tabName: string;
-  bodyTitle: string;
+  bodyTitle?: string;
   bodyDescription: string;
 }
 
@@ -281,16 +282,15 @@ export interface ConsentExperience {
   version: number;
   banner: Banner;
   modal: Modal;
-  jit: JIT;
-  experienceDefault: ExperienceDefault;
+  jit?: JIT;
 }
 
 export interface PreferenceExperience {
   code: string;
   version: number;
   title: string;
-  rights: RightsTab;
-  consents: ConsentsTab;
+  rights?: RightsTab;
+  consents?: ConsentsTab;
   overview: OverviewTab;
 }
 
@@ -333,40 +333,40 @@ export interface GVL {
 
 export interface VendorPurpose {
   id: string;
-  legalBasisCode: string;
+  legalBasisCode?: string;
 }
 
 export interface Vendor {
   id: string;
   name: string;
-  purposes: VendorPurpose[];
-  specialPurposes: VendorPurpose[];
-  features: VendorPurpose[];
-  specialFeatures: VendorPurpose[];
-  policyUrl: string;
+  purposes?: VendorPurpose[];
+  specialPurposes?: VendorPurpose[];
+  features?: VendorPurpose[];
+  specialFeatures?: VendorPurpose[];
+  policyUrl?: string;
 }
 
 export interface Configuration {
   language?: string;
-  organization?: Organization;
+  organization: Organization;
   app?: Application;
   environments?: Environment[];
   environment?: Environment;
   policyScope?: PolicyScopeInfo;
   identities?: {[key: string]: Identity};
   deployment?: Deployment;
-  regulations: string[];
+  regulations?: string[];
   rights?: Right[];
   purposes?: Purpose[];
   experiences?: Experience;
   services?: {[key: string]: string};
   options?: {[key: string]: string};
-  privacyPolicy: PolicyDocument;
-  termsOfService: PolicyDocument;
-  theme: Theme;
-  scripts: string[];
-  vendors: Vendor[];
-  gvl: GVL
+  privacyPolicy?: PolicyDocument;
+  termsOfService?: PolicyDocument;
+  theme?: Theme;
+  scripts?: string[];
+  vendors?: Vendor[];
+  gvl?: GVL
 }
 
 function fetchOptions(method: string, body?: any): RequestInit {
