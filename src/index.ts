@@ -106,13 +106,13 @@ export interface GetConsentRequest {
   controllerCode?: string;
   applicationCode: string;
   applicationEnvironmentCode: string;
-  identities: string[];
-  identityMap: Map<string,string>
+  identities: {[key: string]: string}
   purposes: {[key: string]: PurposeLegalBasis};
 }
 
 export interface GetConsentResponse {
   purposes: {[key: string]: PurposeAllowed};
+  vendors: string[]; // list of vendor ids for which the user has opted out
 }
 
 export interface SetConsentRequest {
@@ -120,12 +120,12 @@ export interface SetConsentRequest {
   controllerCode?: string;
   applicationCode: string;
   applicationEnvironmentCode: string;
-  identities: string[];
-  identityMap: Map<string,string>
+  identities: {[key: string]: string}
   collectedAt?: number;
   policyScopeCode: string;
   migrationOption: MigrationOption;
   purposes: {[key: string]: PurposeAllowedLegalBasis};
+  vendors: string[]; // list of vendor ids for which the user has opted out
 }
 
 export interface User {
@@ -142,8 +142,7 @@ export interface InvokeRightRequest {
   controllerCode?: string;
   applicationCode: string;
   applicationEnvironmentCode: string;
-  identities: string[];
-  identityMap: Map<string,string>
+  identities: {[key: string]: string}
   invokedAt?: number;
   policyScopeCode: string;
   rightCodes: string[];
@@ -318,6 +317,35 @@ export interface Theme {
   feedbackColor: string;
 }
 
+export interface GVLPurpose {
+  id: string
+  name: string;
+  description: string;
+  descriptionLegal: string;
+}
+
+export interface GVL {
+  purposes: {[key: string]:  GVLPurpose};
+  specialPurposes: {[key: string]:  GVLPurpose};
+  features: {[key: string]:  GVLPurpose};
+  specialFeatures: {[key: string]:  GVLPurpose};
+}
+
+export interface VendorPurpose {
+  id: string;
+  legalBasisCode: string;
+}
+
+export interface Vendor {
+  id: string;
+  name: string;
+  purposes: VendorPurpose[];
+  specialPurposes: VendorPurpose[];
+  features: VendorPurpose[];
+  specialFeatures: VendorPurpose[];
+  policyUrl: string;
+}
+
 export interface Configuration {
   language?: string;
   organization?: Organization;
@@ -337,6 +365,8 @@ export interface Configuration {
   termsOfService: PolicyDocument;
   theme: Theme;
   scripts: string[];
+  vendors: Vendor[];
+  gvl: GVL
 }
 
 function fetchOptions(method: string, body?: any): RequestInit {
@@ -370,7 +400,8 @@ export function getBootstrapConfiguration(request: GetBootstrapConfigurationRequ
 
 // Gets the full configuration for the specified parameters.
 export function getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
-  const url = `/config/${request.organizationCode}/${request.appCode}/${request.envCode}/${request.hash}/${request.policyScopeCode}/${request.languageCode}/config.json`;
+  const url = `/config/${request.organizationCode}/${request.appCode}/${request.envCode}/${request.hash}/
+  ${request.policyScopeCode}/${request.languageCode}/config.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
