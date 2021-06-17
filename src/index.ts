@@ -331,18 +331,15 @@ export interface GVL {
   specialFeatures: {[key: string]:  GVLPurpose};
 }
 
-export interface VendorPurpose {
-  id: string;
-  legalBasisCode?: string;
-}
-
 export interface Vendor {
   id: string;
   name: string;
-  purposes?: VendorPurpose[];
-  specialPurposes?: VendorPurpose[];
-  features?: VendorPurpose[];
-  specialFeatures?: VendorPurpose[];
+  purposes?: string[];
+  legIntPurposes?: string[];
+  flexiblePurposes?: string[];
+  specialPurposes?: string[];
+  features?: string[];
+  specialFeatures?: string[];
   policyUrl?: string;
 }
 
@@ -400,8 +397,8 @@ export function getBootstrapConfiguration(request: GetBootstrapConfigurationRequ
 
 // Gets the full configuration for the specified parameters.
 export function getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
-  const url = `/config/${request.organizationCode}/${request.appCode}/${request.envCode}/${request.hash}/
-  ${request.policyScopeCode}/${request.languageCode}/config.json`;
+  // eslint-disable-next-line max-len
+  const url = `/config/${request.organizationCode}/${request.appCode}/${request.envCode}/${request.hash}/${request.policyScopeCode}/${request.languageCode}/config.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
