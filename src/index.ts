@@ -283,6 +283,7 @@ export interface ConsentExperience {
   banner: Banner;
   modal: Modal;
   jit?: JIT;
+  experienceDefault: ExperienceDefault;
 }
 
 export interface PreferenceExperience {
