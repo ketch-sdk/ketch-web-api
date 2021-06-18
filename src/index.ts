@@ -173,14 +173,14 @@ export interface Organization {
   code: string;
 }
 
-export interface PolicyScopeInfo {
+export interface JurisdictionInfo {
   code?: string;
   defaultScopeCode?: string;
   variable?: string;
   scopes?: {[key: string]: string};
 }
 
-export interface Application {
+export interface Property {
   code?: string;
   name?: string;
   platform?: string;
@@ -347,10 +347,10 @@ export interface Vendor {
 export interface Configuration {
   language?: string;
   organization: Organization;
-  app?: Application;
+  property?: Property;
   environments?: Environment[];
   environment?: Environment;
-  policyScope?: PolicyScopeInfo;
+  jurisdiction?: JurisdictionInfo;
   identities?: {[key: string]: Identity};
   deployment?: Deployment;
   regulations?: string[];
