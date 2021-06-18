@@ -108,7 +108,7 @@ export interface PurposeAllowedLegalBasis {
 
 export interface GetConsentRequest {
   organizationCode: string;
-  beneficiaryCode?: string;
+  controllerCode?: string;
   propertyCode: string;
   environmentCode: string;
   identities: {[key: string]: string}
@@ -122,7 +122,7 @@ export interface GetConsentResponse {
 
 export interface SetConsentRequest {
   organizationCode: string;
-  beneficiaryCode?: string;
+  controllerCode?: string;
   propertyCode: string;
   environmentCode: string;
   identities: {[key: string]: string}
@@ -144,7 +144,7 @@ export interface User {
 
 export interface InvokeRightRequest {
   organizationCode: string;
-  beneficiaryCode?: string;
+  controllerCode?: string;
   propertyCode: string;
   environmentCode: string;
   identities: {[key: string]: string}
