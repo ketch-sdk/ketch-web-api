@@ -108,9 +108,9 @@ export interface PurposeAllowedLegalBasis {
 
 export interface GetConsentRequest {
   organizationCode: string;
-  controllerCode?: string;
-  applicationCode: string;
-  applicationEnvironmentCode: string;
+  beneficiaryCode?: string;
+  propertyCode: string;
+  environmentCode: string;
   identities: {[key: string]: string}
   purposes: {[key: string]: PurposeLegalBasis};
 }
@@ -122,12 +122,12 @@ export interface GetConsentResponse {
 
 export interface SetConsentRequest {
   organizationCode: string;
-  controllerCode?: string;
-  applicationCode: string;
-  applicationEnvironmentCode: string;
+  beneficiaryCode?: string;
+  propertyCode: string;
+  environmentCode: string;
   identities: {[key: string]: string}
   collectedAt?: number;
-  policyScopeCode: string;
+  jurisdictionCode: string;
   migrationOption: MigrationOption;
   purposes: {[key: string]: PurposeAllowedLegalBasis};
   vendors?: string[]; // list of vendor ids for which the user has opted out
@@ -144,28 +144,28 @@ export interface User {
 
 export interface InvokeRightRequest {
   organizationCode: string;
-  controllerCode?: string;
-  applicationCode: string;
-  applicationEnvironmentCode: string;
+  beneficiaryCode?: string;
+  propertyCode: string;
+  environmentCode: string;
   identities: {[key: string]: string}
   invokedAt?: number;
-  policyScopeCode: string;
+  jurisdictionCode: string;
   rightCodes: string[];
   user: User;
 }
 
 export interface GetBootstrapConfigurationRequest {
   organizationCode: string;
-  appCode: string;
+  propertyCode: string;
 }
 
 export interface GetFullConfigurationRequest {
   organizationCode: string;
-  appCode: string;
-  envCode: string;
+  propertyCode: string;
+  environmentCode: string;
   hash: string;
   deploymentID?: string;
-  policyScopeCode: string;
+  jurisdictionCode: string;
   languageCode: string;
 }
 
@@ -392,14 +392,14 @@ export function getLocation(request: GetLocationRequest): Promise<GetLocationRes
 
 // Gets the bootstrap configuration for the specified parameters.
 export function getBootstrapConfiguration(request: GetBootstrapConfigurationRequest): Promise<Configuration> {
-  const url = `/config/${request.organizationCode}/${request.appCode}/boot.json`;
+  const url = `/config/${request.organizationCode}/${request.propertyCode}/boot.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
 // Gets the full configuration for the specified parameters.
 export function getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
   // eslint-disable-next-line max-len
-  const url = `/config/${request.organizationCode}/${request.appCode}/${request.envCode}/${request.hash}/${request.policyScopeCode}/${request.languageCode}/config.json`;
+  const url = `/config/${request.organizationCode}/${request.propertyCode}/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}/config.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
