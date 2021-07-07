@@ -315,36 +315,38 @@ export interface Experience {
   preference?: PreferenceExperience;
 }
 
-export enum ThemeBannerPosition {
+export enum BannerPosition {
   BOTTOM = 1,
   TOP = 2,
   BOTTOM_LEFT = 3,
   BOTTOM_RIGHT = 4,
 }
 
-export enum ThemeModalPosition {
+export enum ModalPosition {
   CENTER = 1,
   LEFT_FULL_HEIGHT = 2,
   RIGHT_FULL_HEIGHT = 3,
 }
 
 export interface Theme {
-  code?: string
-  version?: number
-  bannerPosition?: ThemeBannerPosition
-  modalPosition?: ThemeModalPosition
-  buttonBorderRadius?: number
+  watermark?: boolean
+  buttonBorderRadius: number
+
   bannerBackgroundColor: string
   bannerContentColor?: string
-  bannerButtonColor?: string
-  modalHeaderBackgroundColor?: string
+  bannerButtonColor: string
+  bannerPosition?: BannerPosition
+
+  modalHeaderBackgroundColor: string
   modalHeaderContentColor?: string
-  modalContentColor?: string
-  modalButtonColor?: string
-  formHeaderBackgroundColor?: string
+  modalContentColor: string
+  modalButtonColor: string
+  modalPosition?: ModalPosition
+
+  formHeaderBackgroundColor: string
   formHeaderContentColor?: string
-  formContentColor?: string
-  formButtonColor?: string
+  formContentColor: string
+  formButtonColor: string
 }
 
 export interface GVLPurpose {
