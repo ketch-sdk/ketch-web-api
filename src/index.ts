@@ -306,16 +306,36 @@ export interface Experience {
   preference?: PreferenceExperience;
 }
 
+export enum ThemeBannerPosition {
+  BOTTOM = 1,
+  TOP = 2,
+  BOTTOM_LEFT = 3,
+  BOTTOM_RIGHT = 4,
+}
+
+export enum ThemeModalPosition {
+  CENTER = 1,
+  LEFT_FULL_HEIGHT = 2,
+  RIGHT_FULL_HEIGHT = 3,
+}
+
 export interface Theme {
-  code: string;
-  name: string;
-  description: string;
-  bannerBackgroundColor: string;
-  lightboxRibbonColor: string;
-  formHeaderColor: string;
-  statusColor: string;
-  highlightColor: string;
-  feedbackColor: string;
+  code?: string
+  version?: number
+  bannerPosition?: ThemeBannerPosition
+  modalPosition?: ThemeModalPosition
+  buttonBorderRadius?: number
+  bannerBackgroundColor: string
+  bannerContentColor?: string
+  bannerButtonColor?: string
+  modalHeaderBackgroundColor?: string
+  modalHeaderContentColor?: string
+  modalContentColor?: string
+  modalButtonColor?: string
+  formHeaderBackgroundColor?: string
+  formHeaderContentColor?: string
+  formContentColor?: string
+  formButtonColor?: string
 }
 
 export interface GVLPurpose {
