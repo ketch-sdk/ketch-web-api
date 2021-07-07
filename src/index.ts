@@ -210,6 +210,13 @@ export interface Cookie {
   version: number;
 }
 
+export type PurposeCategory = {
+  name: string
+  description: string
+  retentionPeriod: string
+  externalTransfers: string
+}
+
 export interface Purpose {
   code: string;
   name?: string;
@@ -217,8 +224,10 @@ export interface Purpose {
   legalBasisCode: string;
   requiresOptIn?: boolean;
   allowsOptOut?: boolean;
+  requiresDisplay?: boolean
   requiresPrivacyPolicy?: boolean;
   cookies?: Cookie[];
+  categories?: PurposeCategory[]
 }
 
 export interface Identity {
