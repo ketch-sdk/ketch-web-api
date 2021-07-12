@@ -1,7 +1,5 @@
 import fetch from './lib/fetch';
 
-const baseUrl = 'https://global.ketchcdn.com/web/v1';
-
 export enum ExperienceDefault {
   BANNER = 1,
   MODAL,
@@ -416,38 +414,38 @@ function fetchOptions(method: string, body?: any): RequestInit {
 }
 
 // Get location details based on the IP address.
-export function getLocation(request: GetLocationRequest): Promise<GetLocationResponse> {
-  const url = `/ip/${request.IP}`;
+export function getLocation(baseUrl: string): Promise<GetLocationResponse> {
+  const url = `/ip`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as GetLocationResponse);
 }
 
 // Gets the bootstrap configuration for the specified parameters.
-export function getBootstrapConfiguration(request: GetBootstrapConfigurationRequest): Promise<Configuration> {
+export function getBootstrapConfiguration(baseUrl: string, request: GetBootstrapConfigurationRequest): Promise<Configuration> {
   const url = `/config/${request.organizationCode}/${request.propertyCode}/boot.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
 // Gets the full configuration for the specified parameters.
-export function getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
+export function getFullConfiguration(baseUrl: string, request: GetFullConfigurationRequest): Promise<Configuration> {
   // eslint-disable-next-line max-len
   const url = `/config/${request.organizationCode}/${request.propertyCode}/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}/config.json`;
   return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration);
 }
 
 // Gets the current state of the user's consent flags.
-export function getConsent(request: GetConsentRequest): Promise<GetConsentResponse> {
+export function getConsent(baseUrl: string, request: GetConsentRequest): Promise<GetConsentResponse> {
   const url = `/consent/${request.organizationCode}/get`;
   return fetch(baseUrl + url, fetchOptions('POST', request)).then((resp: any) => resp as GetConsentResponse);
 }
 
 // Sets the user's consent flags.
-export function setConsent(request: SetConsentRequest): Promise<void> {
+export function setConsent(baseUrl: string, request: SetConsentRequest): Promise<void> {
   const url = `/consent/${request.organizationCode}/update`;
   return fetch(baseUrl + url, fetchOptions('POST', request)).then(() => {});
 }
 
 // Invokes the specified rights.
-export function invokeRight(request: InvokeRightRequest): Promise<void> {
+export function invokeRight(baseUrl: string, request: InvokeRightRequest): Promise<void> {
   const url = `/rights/${request.organizationCode}/invoke`;
   return fetch(baseUrl + url, fetchOptions('POST', request)).then(() => {});
 }
