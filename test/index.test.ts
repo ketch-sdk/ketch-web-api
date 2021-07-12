@@ -14,6 +14,8 @@ import {
   setConsent
 } from "../src";
 
+const baseUrl = 'https://global.ketchcdn.com/web/v1';
+
 describe('@ketch-com/ketch-web-api', () => {
   describe('GetLocation', () => {
     it('calls service', () => {
@@ -24,9 +26,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(getLocation({
-        IP: '1.2.3.5',
-      })).resolves.toBe(v);
+      expect(getLocation(baseUrl)).resolves.toBe(v);
 
       expect(mockFetch).toBeCalled();
     });
@@ -40,7 +40,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(getBootstrapConfiguration({
+      expect(getBootstrapConfiguration(baseUrl, {
         organizationCode: 'switchbitcorp',
         appCode: 'switchbit',
       })).resolves.toBe(v);
@@ -57,7 +57,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(getFullConfiguration({
+      expect(getFullConfiguration(baseUrl,{
         organizationCode: 'switchbitcorp',
         appCode: 'switchbit',
         envCode: 'production',
@@ -82,7 +82,7 @@ describe('@ketch-com/ketch-web-api', () => {
       };
       mockFetch.mockResolvedValue(v);
 
-      expect(getConsent({
+      expect(getConsent(baseUrl, {
         organizationCode: 'switchbitcorp',
         applicationCode: 'switchbit',
         applicationEnvironmentCode: 'production',
@@ -117,7 +117,7 @@ describe('@ketch-com/ketch-web-api', () => {
     it('calls service', () => {
       mockFetch.mockResolvedValue(void(0));
 
-      expect(setConsent({
+      expect(setConsent(baseUrl, {
         organizationCode: 'switchbitcorp',
         applicationCode: 'switchbit',
         applicationEnvironmentCode: 'production',
@@ -160,7 +160,7 @@ describe('@ketch-com/ketch-web-api', () => {
     it('calls service', () => {
       mockFetch.mockResolvedValue(void(0));
 
-      expect(invokeRight({
+      expect(invokeRight(baseUrl, {
         organizationCode: 'switchbitcorp',
         "applicationCode":"switchbit",
         "applicationEnvironmentCode":"production",
