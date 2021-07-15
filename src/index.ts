@@ -226,6 +226,8 @@ export interface Purpose {
   requiresPrivacyPolicy?: boolean;
   cookies?: Cookie[];
   categories?: PurposeCategory[]
+  tcfType?: string
+  tcfId?: string
 }
 
 export interface Identity {
