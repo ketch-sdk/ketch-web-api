@@ -227,7 +227,7 @@ export interface Purpose {
   cookies?: Cookie[];
   categories?: PurposeCategory[]
   tcfType?: string
-  tcfId?: string
+  tcfID?: string
 }
 
 export interface Identity {
