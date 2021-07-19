@@ -351,6 +351,7 @@ export interface Theme {
 
 export interface VendorPurpose {
   name: string;
+  legalBasis?: string; // legalBasisName
 }
 
 export interface Vendor {
@@ -361,6 +362,7 @@ export interface Vendor {
   features?: VendorPurpose[];
   specialFeatures?: VendorPurpose[];
   policyUrl?: string;
+  cookieMaxAgeSeconds?: number;
 }
 
 export interface Configuration {
