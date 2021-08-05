@@ -228,7 +228,8 @@ export interface Purpose {
   categories?: PurposeCategory[]
   tcfType?: string
   tcfId?: string
-  canonicalPurposeCode: string
+  legalBasisName?: string
+  legalBasisDescription?: string
 }
 
 export interface Identity {
@@ -388,6 +389,7 @@ export interface Configuration {
   regulations?: string[];
   rights?: Right[];
   purposes?: Purpose[];
+  canonicalPurposes?: {[key: string]: string[]}
   experiences?: Experience;
   services?: {[key: string]: string};
   options?: {[key: string]: string};
