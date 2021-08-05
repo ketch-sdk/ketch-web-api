@@ -233,7 +233,7 @@ export interface Purpose {
 }
 
 export interface CanonicalPurpose {
-  purposeCodes: string[]
+  purposeCodes?: string[]
 }
 
 export interface Identity {
