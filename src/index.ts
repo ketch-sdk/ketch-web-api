@@ -232,6 +232,10 @@ export interface Purpose {
   legalBasisDescription?: string
 }
 
+export interface CanonicalPurpose {
+  purposeCodes: string[]
+}
+
 export interface Identity {
   type: string;
   variable: string;
@@ -389,7 +393,7 @@ export interface Configuration {
   regulations?: string[];
   rights?: Right[];
   purposes?: Purpose[];
-  canonicalPurposes?: {[key: string]: string[]}
+  canonicalPurposes?: {[key: string]: CanonicalPurpose}
   experiences?: Experience;
   services?: {[key: string]: string};
   options?: {[key: string]: string};
