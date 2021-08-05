@@ -233,6 +233,7 @@ export interface Purpose {
 }
 
 export interface CanonicalPurpose {
+  code: string
   purposeCodes?: string[]
 }
 
