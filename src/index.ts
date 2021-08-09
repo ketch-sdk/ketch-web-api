@@ -228,12 +228,12 @@ export interface Purpose {
   categories?: PurposeCategory[]
   tcfType?: string
   tcfId?: string
+  canonicalPurposeCode?: string
   legalBasisName?: string
   legalBasisDescription?: string
 }
 
 export interface CanonicalPurpose {
-  code: string
   purposeCodes?: string[]
 }
 
