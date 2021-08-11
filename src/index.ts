@@ -380,6 +380,7 @@ export interface Vendor {
   features?: string[];
   specialFeatures?: string[];
   policyUrl?: string;
+  cookieMaxAgeSeconds?: string;
 }
 
 export interface Configuration {
