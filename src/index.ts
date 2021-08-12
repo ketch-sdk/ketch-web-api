@@ -227,8 +227,7 @@ export interface Purpose {
   cookies?: Cookie[];
   categories?: PurposeCategory[]
   tcfType?: string
-  tcfId?: string
-  canonicalPurposeCode?: string
+  tcfID?: string
   legalBasisName?: string
   legalBasisDescription?: string
 }
@@ -356,31 +355,20 @@ export interface Theme {
   formButtonColor: string
 }
 
-export interface GVLPurpose {
-  id: string
+export interface VendorPurpose {
   name: string;
-  description: string;
-  descriptionLegal: string;
-}
-
-export interface GVL {
-  purposes: {[key: string]:  GVLPurpose};
-  specialPurposes: {[key: string]:  GVLPurpose};
-  features: {[key: string]:  GVLPurpose};
-  specialFeatures: {[key: string]:  GVLPurpose};
+  legalBasis?: string; // legalBasisName
 }
 
 export interface Vendor {
   id: string;
   name: string;
-  purposes?: string[];
-  legIntPurposes?: string[];
-  flexiblePurposes?: string[];
-  specialPurposes?: string[];
-  features?: string[];
-  specialFeatures?: string[];
+  purposes?: VendorPurpose[];
+  specialPurposes?: VendorPurpose[];
+  features?: VendorPurpose[];
+  specialFeatures?: VendorPurpose[];
   policyUrl?: string;
-  cookieMaxAgeSeconds?: string;
+  cookieMaxAgeSeconds?: number;
 }
 
 export interface Configuration {
@@ -404,7 +392,6 @@ export interface Configuration {
   theme?: Theme;
   scripts?: string[];
   vendors?: Vendor[];
-  gvl?: GVL
 }
 
 function fetchOptions(method: string, body?: any): RequestInit {
