@@ -109,6 +109,7 @@ export interface GetConsentRequest {
   controllerCode?: string;
   propertyCode: string;
   environmentCode: string;
+  jurisdictionCode: string;
   identities: {[key: string]: string}
   purposes: {[key: string]: PurposeLegalBasis};
 }
