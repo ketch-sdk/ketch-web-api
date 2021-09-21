@@ -115,7 +115,7 @@ export interface GetConsentRequest {
 }
 
 export interface GetConsentResponse {
-  purposes: {[key: string]: PurposeAllowed};
+  purposes: {[key: string]: (PurposeAllowed | string)};
   vendors?: string[]; // list of vendor ids for which the user has opted out
 }
 
