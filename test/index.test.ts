@@ -84,9 +84,12 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(getConsent(baseUrl, {
         organizationCode: 'switchbitcorp',
-        applicationCode: 'switchbit',
-        applicationEnvironmentCode: 'production',
-        identities: ['srn:::::switchbitcorp:id/swb_switchbit/2I0tgfvRzAyP7A9ma7Eqo6'],
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          'swb_switchbit': '2I0tgfvRzAyP7A9ma7Eqo6'
+        },
+        jurisdictionCode: 'default',
         purposes: {
           'coreprodserv': {
             'legalBasisCode': 'disclosure',
@@ -119,10 +122,12 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(setConsent(baseUrl, {
         organizationCode: 'switchbitcorp',
-        applicationCode: 'switchbit',
-        applicationEnvironmentCode: 'production',
-        identities: ['srn:::::switchbitcorp:id/swb_switchbit/2I0tgfvRzAyP7A9ma7Eqo6'],
-        policyScopeCode: '',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          'swb_switchbit': '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: '',
         purposes: {
           "coreprodserv":{
             "allowed": 'true',
@@ -162,9 +167,21 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(invokeRight(baseUrl, {
         organizationCode: 'switchbitcorp',
-        "applicationCode":"switchbit",
-        "applicationEnvironmentCode":"production",
-        "identities":["srn:::::switchbitcorp:id/swb_switchbit/2I0tgfvRzAyP7A9ma7Eqo6"],"policyScopeCode":"gdpreea","rightCodes":["gdpr_portability"],"user":{"email":"ignore.me@backbonelabs.io","first":"Just","last":"Testing","country":"FR","stateRegion":"France","description":"Ignore me"}
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          'swb_switchbit': '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: 'gdpreea',
+        rightCodes: ['gdpr_portability'],
+        user: {
+          email:'ignore.me@ketch.com',
+          first: 'Just"',
+          last: 'Testing',
+          country: 'FR',
+          stateRegion: "France",
+          description: "Ignore me"
+        }
       })).resolves.toBe(void(0));
 
       expect(mockFetch).toBeCalled();
