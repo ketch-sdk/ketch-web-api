@@ -149,7 +149,7 @@ export interface InvokeRightRequest {
   identities: {[key: string]: string}
   invokedAt?: number;
   jurisdictionCode: string;
-  rightCodes: string[];
+  rightCode: string;
   user: User;
 }
 
@@ -234,6 +234,8 @@ export interface Purpose {
 }
 
 export interface CanonicalPurpose {
+  code: string
+  name: string
   purposeCodes?: string[]
 }
 
@@ -370,6 +372,8 @@ export interface Vendor {
   specialFeatures?: VendorPurpose[];
   policyUrl?: string;
   cookieMaxAgeSeconds?: number;
+  usesCookies?: boolean;
+  UsesNonCookieAccess?: boolean;
 }
 
 export interface Configuration {
