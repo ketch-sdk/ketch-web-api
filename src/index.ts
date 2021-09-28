@@ -229,6 +229,7 @@ export interface Purpose {
   categories?: PurposeCategory[]
   tcfType?: string
   tcfID?: string
+  canonicalPurposeCode?: string
   legalBasisName?: string
   legalBasisDescription?: string
 }
