@@ -1,7 +1,7 @@
 jest.mock('../src/lib/fetch');
 
 import fetch from "../src/lib/fetch";
-import {mocked} from 'ts-jest/utils';
+import {mocked} from 'ts-jest';
 
 const mockFetch = mocked(fetch);
 
