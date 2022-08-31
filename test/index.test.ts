@@ -2,9 +2,9 @@
 jest.mock('../src/lib/fetch')
 
 import fetch from '../src/lib/fetch'
-import { mocked } from 'ts-jest/utils'
+jest.mock('../src/lib/fetch')
 
-const mockFetch = mocked(fetch)
+const mockFetch = jest.mocked(fetch)
 
 import {
   getBootstrapConfiguration,
