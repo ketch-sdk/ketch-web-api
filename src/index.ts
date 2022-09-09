@@ -139,10 +139,6 @@ export interface User {
   country?: string
   stateRegion?: string
   description?: string
-  phone?: string
-  postalCode?: string
-  addressLine1?: string
-  addressLine2?: string
 }
 
 export interface InvokeRightRequest {
