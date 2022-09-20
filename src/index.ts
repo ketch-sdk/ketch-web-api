@@ -7,7 +7,8 @@ export enum ExperienceDefault {
 
 export enum ExperienceButtonDestination {
   GOTO_MODAL = 1,
-  GOTO_PREFERENCE,
+  GOTO_PREFERENCE = 2,
+  REJECT_ALL = 3,
 }
 
 export enum ExperiencePrimaryButtonAction {
