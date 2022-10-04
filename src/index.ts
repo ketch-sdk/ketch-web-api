@@ -188,7 +188,6 @@ export interface Property {
   code?: string
   name?: string
   platform?: string
-  // TODO data subject
 }
 
 export interface Environment {
@@ -238,7 +237,12 @@ export interface Purpose {
   canonicalPurposeCode?: string
   legalBasisName?: string
   legalBasisDescription?: string
+
+  // the identifier of the stack that the purpose belongs to when displayed. If empty, this purpose belongs to no stack
   stackID?: string
+
+  // the data subjects for which the purpose is relevant. If this list is empty, the purpose applies to all data subjects
+  dataSubjectCodes?: string[]
 }
 
 export interface CanonicalPurpose {
@@ -325,6 +329,9 @@ export interface Right {
   code: string
   name: string
   description: string
+
+  // the data subjects for which the right is relevant. If this list is empty then the right applies to all data subjects
+  dataSubjectCodes?: string[]
 }
 
 export interface Experience {
@@ -385,11 +392,13 @@ export interface Vendor {
   UsesNonCookieAccess?: boolean
 }
 
+// DataSubject represents user defined data subjects with code as the unique identifier
 export interface DataSubject {
   code: string
   name: string
 }
 
+// Stack represents a grouping of purposes to be displayed in an experience
 export interface Stack {
   id: string
   name: string
@@ -416,7 +425,11 @@ export interface Configuration {
   theme?: Theme
   scripts?: string[]
   vendors?: Vendor[]
+
+  // dataSubjects is the list of data subjects relevant for this configuration
   dataSubjects?: DataSubject[]
+
+  // stacks is the list of stacks to be displayed in an experience
   stacks?: Stack[]
 }
 
