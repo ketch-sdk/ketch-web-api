@@ -188,6 +188,7 @@ export interface Property {
   code?: string
   name?: string
   platform?: string
+  // TODO data subject
 }
 
 export interface Environment {
@@ -237,6 +238,7 @@ export interface Purpose {
   canonicalPurposeCode?: string
   legalBasisName?: string
   legalBasisDescription?: string
+  stackID?: string
 }
 
 export interface CanonicalPurpose {
@@ -350,6 +352,7 @@ export interface Theme {
   bannerBackgroundColor: string
   bannerContentColor?: string
   bannerButtonColor: string
+  bannerSecondaryButtonColor?: string
   bannerPosition?: BannerPosition
 
   modalHeaderBackgroundColor: string
@@ -382,6 +385,16 @@ export interface Vendor {
   UsesNonCookieAccess?: boolean
 }
 
+export interface DataSubject {
+  code: string
+  name: string
+}
+
+export interface Stack {
+  id: string
+  name: string
+}
+
 export interface Configuration {
   language?: string
   organization: Organization
@@ -403,6 +416,8 @@ export interface Configuration {
   theme?: Theme
   scripts?: string[]
   vendors?: Vendor[]
+  dataSubjects?: DataSubject[]
+  stacks?: Stack[]
 }
 
 function fetchOptions(method: string, body?: any): RequestInit {
