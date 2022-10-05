@@ -238,11 +238,8 @@ export interface Purpose {
   legalBasisName?: string
   legalBasisDescription?: string
 
-  // the identifier of the stack that the purpose belongs to when displayed. If empty, this purpose belongs to no stack
-  stackID?: string
-
-  // the data subjects for which the purpose is relevant. If this list is empty, the purpose applies to all data subjects
-  dataSubjectCodes?: string[]
+  // the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all data subject types
+  dataSubjectTypeCodes?: string[]
 }
 
 export interface CanonicalPurpose {
@@ -379,8 +376,8 @@ export interface Right {
   name: string
   description: string
 
-  // the data subjects for which the right is relevant. If this list is empty then the right applies to all data subjects
-  dataSubjectCodes?: string[]
+  // the data subject types for which the right is relevant. If this list is empty then the right applies to all data subject types
+  dataSubjectTypeCodes?: string[]
 }
 
 export interface Experience {
@@ -438,19 +435,25 @@ export interface Vendor {
   policyUrl?: string
   cookieMaxAgeSeconds?: number
   usesCookies?: boolean
-  UsesNonCookieAccess?: boolean
+  UsesNonCookieAccess?: boolean // deprecated
+
+  // replaces UsesNonCookieAccess
+  usesNonCookieAccess?: boolean
 }
 
-// DataSubject represents user defined data subjects with code as the unique identifier
-export interface DataSubject {
+// DataSubjectType represents user defined data subject types with code as the unique identifier
+export interface DataSubjectType {
   code: string
   name: string
 }
 
 // Stack represents a grouping of purposes to be displayed in an experience
 export interface Stack {
-  id: string
+  // name of the stack to be displayed
   name: string
+
+  // list of purpose codes that are members of the stack
+  purposeCodes: string[]
 }
 
 export interface Configuration {
@@ -475,8 +478,8 @@ export interface Configuration {
   scripts?: string[]
   vendors?: Vendor[]
 
-  // dataSubjects is the list of data subjects relevant for this configuration
-  dataSubjects?: DataSubject[]
+  // dataSubjectTypes is the list of data subject types relevant for this configuration
+  dataSubjectTypes?: DataSubjectType[]
 
   // stacks is the list of stacks to be displayed in an experience
   stacks?: Stack[]
