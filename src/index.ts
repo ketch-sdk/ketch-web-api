@@ -269,6 +269,9 @@ export interface Banner {
   primaryButtonAction?: ExperiencePrimaryButtonAction
   secondaryButtonText?: string
   secondaryButtonDestination?: ExperienceButtonDestination
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface Modal {
@@ -276,6 +279,19 @@ export interface Modal {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // consentTitle is the heading that goes above the list of purposes
+  // if not
+  consentTitle?: string
+
+  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  hideConsentTitle?: boolean
+
+  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  hideLegalBases?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface JIT {
@@ -285,6 +301,9 @@ export interface JIT {
   declineButtonText: string
   moreInfoText?: string
   moreInfoDestination?: ExperienceButtonDestination
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface RightsTab {
@@ -292,6 +311,9 @@ export interface RightsTab {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface ConsentsTab {
@@ -299,12 +321,27 @@ export interface ConsentsTab {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // consentTitle is the heading that goes above the list of purposes
+  consentTitle?: string
+
+  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  hideConsentTitle?: boolean
+
+  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  hideLegalBases?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface OverviewTab {
   tabName: string
   bodyTitle?: string
   bodyDescription: string
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface ConsentExperience {
@@ -314,6 +351,12 @@ export interface ConsentExperience {
   modal: Modal
   jit?: JIT
   experienceDefault: ExperienceDefault
+
+  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  showCloseIcon?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface PreferenceExperience {
@@ -323,6 +366,12 @@ export interface PreferenceExperience {
   rights?: RightsTab
   consents?: ConsentsTab
   overview: OverviewTab
+
+  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  showCloseIcon?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface Right {
