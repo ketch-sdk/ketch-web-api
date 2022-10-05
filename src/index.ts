@@ -237,6 +237,9 @@ export interface Purpose {
   canonicalPurposeCode?: string
   legalBasisName?: string
   legalBasisDescription?: string
+
+  // the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all data subject types
+  dataSubjectTypeCodes?: string[]
 }
 
 export interface CanonicalPurpose {
@@ -263,6 +266,9 @@ export interface Banner {
   primaryButtonAction?: ExperiencePrimaryButtonAction
   secondaryButtonText?: string
   secondaryButtonDestination?: ExperienceButtonDestination
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface Modal {
@@ -270,6 +276,19 @@ export interface Modal {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // consentTitle is the heading that goes above the list of purposes
+  // if not
+  consentTitle?: string
+
+  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  hideConsentTitle?: boolean
+
+  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  hideLegalBases?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface JIT {
@@ -279,6 +298,9 @@ export interface JIT {
   declineButtonText: string
   moreInfoText?: string
   moreInfoDestination?: ExperienceButtonDestination
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface RightsTab {
@@ -286,6 +308,9 @@ export interface RightsTab {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface ConsentsTab {
@@ -293,12 +318,27 @@ export interface ConsentsTab {
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
+
+  // consentTitle is the heading that goes above the list of purposes
+  consentTitle?: string
+
+  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  hideConsentTitle?: boolean
+
+  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  hideLegalBases?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface OverviewTab {
   tabName: string
   bodyTitle?: string
   bodyDescription: string
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface ConsentExperience {
@@ -308,6 +348,12 @@ export interface ConsentExperience {
   modal: Modal
   jit?: JIT
   experienceDefault: ExperienceDefault
+
+  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  showCloseIcon?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface PreferenceExperience {
@@ -317,12 +363,21 @@ export interface PreferenceExperience {
   rights?: RightsTab
   consents?: ConsentsTab
   overview: OverviewTab
+
+  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  showCloseIcon?: boolean
+
+  // additional extensions
+  extensions?: { [key: string]: string }
 }
 
 export interface Right {
   code: string
   name: string
   description: string
+
+  // the data subject types for which the right is relevant. If this list is empty then the right applies to all data subject types
+  dataSubjectTypeCodes?: string[]
 }
 
 export interface Experience {
@@ -350,6 +405,7 @@ export interface Theme {
   bannerBackgroundColor: string
   bannerContentColor?: string
   bannerButtonColor: string
+  bannerSecondaryButtonColor?: string
   bannerPosition?: BannerPosition
 
   modalHeaderBackgroundColor: string
@@ -379,7 +435,25 @@ export interface Vendor {
   policyUrl?: string
   cookieMaxAgeSeconds?: number
   usesCookies?: boolean
-  UsesNonCookieAccess?: boolean
+  UsesNonCookieAccess?: boolean // deprecated
+
+  // replaces UsesNonCookieAccess
+  usesNonCookieAccess?: boolean
+}
+
+// DataSubjectType represents user defined data subject types with code as the unique identifier
+export interface DataSubjectType {
+  code: string
+  name: string
+}
+
+// Stack represents a grouping of purposes to be displayed in an experience
+export interface Stack {
+  // name of the stack to be displayed
+  name: string
+
+  // list of purpose codes that are members of the stack
+  purposeCodes: string[]
 }
 
 export interface Configuration {
@@ -403,6 +477,12 @@ export interface Configuration {
   theme?: Theme
   scripts?: string[]
   vendors?: Vendor[]
+
+  // dataSubjectTypes is the list of data subject types relevant for this configuration
+  dataSubjectTypes?: DataSubjectType[]
+
+  // stacks is the list of stacks to be displayed in an experience
+  stacks?: Stack[]
 }
 
 function fetchOptions(method: string, body?: any): RequestInit {
