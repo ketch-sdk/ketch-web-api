@@ -53,10 +53,6 @@ jobs:
         run: npm run lint
       - name: Check test
         run: npm run test
-      - name: Upload coverage
-        uses: romeovs/lcov-reporter-action@v0.3.1
-        with:
-          lcov-file: ./test-reports/coverage/lcov.info
       - name: Build
         run: npm run build
       - name: Publish
