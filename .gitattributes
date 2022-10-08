@@ -1,0 +1,1 @@
+scripts/*.sh -diff linguist-generated=true
