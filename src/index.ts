@@ -131,6 +131,11 @@ export interface SetConsentRequest {
   migrationOption: MigrationOption
   purposes: { [key: string]: PurposeAllowedLegalBasis }
   vendors?: string[] // list of vendor ids for which the user has opted out
+
+  // identityPriority is a map from the identity space code to the priority that should be used to resolve consent conflict
+  // lower values take top priority
+  // if an identity space codes is not in the identityPriority map then it is the last priority
+  identityPriority: { [key: string]: number }
 }
 
 export interface User {
@@ -156,6 +161,12 @@ export interface InvokeRightRequest {
   jurisdictionCode: string
   rightCode: string
   user: User
+
+  // dataSubjectTypeCode is the identifier representing the data subject type specified by the user
+  dataSubjectTypeCode: string
+
+  // dataSubjectTypeUserInput is additional information provided by the user describing their relation to the business
+  dataSubjectTypeUserInput: string
 }
 
 export interface GetBootstrapConfigurationRequest {
@@ -248,9 +259,48 @@ export interface CanonicalPurpose {
   purposeCodes?: string[]
 }
 
+// IdentityLocation is the location on the page from which to retrieve identity information
+export enum IdentityLocation {
+  IDENTITY_LOCATION_UNDEFINED,
+  IDENTITY_LOCATION_DATA_LAYER,
+  IDENTITY_LOCATION_WINDOW,
+  IDENTITY_LOCATION_COOKIE,
+  IDENTITY_LOCATION_MANAGED, // this is created if necessary and stored in a cookie with the associated name
+  IDENTITY_LOCATION_LOCAL_STORAGE,
+  IDENTITY_LOCATION_SESSION_STORAGE,
+  IDENTITY_LOCATION_URL_QUERY_PARAM,
+}
+
+// IdentityFormat is the encoding of the string identity value
+export enum IdentityFormat {
+  IDENTITY_FORMAT_UNDEFINED,
+  IDENTITY_FORMAT_STRING,
+  IDENTITY_FORMAT_JSON,
+  IDENTITY_FORMAT_JWT,
+  IDENTITY_FORMAT_URL_ENCODED,
+}
+
+// Identity represents all the metadata for an identifier on the page
 export interface Identity {
-  type: string
-  variable: string
+
+  // DEPRECATED: type is a string representing the location of the identity on the page
+  type?: string // deprecated
+
+  // location on the page from which to retrieve identity information
+  location?: IdentityLocation
+
+  // name is the identifier to look up the identity value in the specified location
+  name: string
+
+  // format is the encoding of the value
+  format: IdentityFormat
+
+  // key is the identifier to find the identity within the value
+  // if the format is IDENTITY_FORMAT_STRING then key will be undefined
+  key?: string
+
+  // priority of the identity for consent conflict resolution
+  priority?: number
 }
 
 export interface PolicyDocument {
@@ -445,6 +495,9 @@ export interface Vendor {
 export interface DataSubjectType {
   code: string
   name: string
+
+  // requiresUserInput is true if additional information must be requested to describe the data subject relation
+  requiresUserInput: boolean
 }
 
 // Stack represents a grouping of purposes to be displayed in an experience
