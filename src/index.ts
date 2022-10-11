@@ -150,11 +150,11 @@ export interface User {
   addressLine1?: string
   addressLine2?: string
 
-  // dataSubjectTypeCode is the identifier representing the data subject type specified by the user
-  dataSubjectTypeCode?: string
+  // typeCode is the identifier representing the data subject type specified by the user
+  typeCode?: string
 
-  // dataSubjectTypeUserInput is additional information provided by the user describing their relation to the business
-  dataSubjectTypeUserInput?: string
+  // typeDescription is additional information provided by the user describing their relation to the business
+  typeDescription?: string
 }
 
 export interface InvokeRightRequest {
@@ -268,7 +268,7 @@ export enum IdentityLocation {
   IDENTITY_LOCATION_MANAGED, // this is created if necessary and stored in a cookie with the associated name
   IDENTITY_LOCATION_LOCAL_STORAGE,
   IDENTITY_LOCATION_SESSION_STORAGE,
-  IDENTITY_LOCATION_URL_QUERY_PARAM,
+  IDENTITY_LOCATION_QUERY_STRING,
 }
 
 // IdentityFormat is the encoding of the string identity value
