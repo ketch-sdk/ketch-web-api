@@ -149,6 +149,12 @@ export interface User {
   postalCode?: string
   addressLine1?: string
   addressLine2?: string
+
+  // dataSubjectTypeCode is the identifier representing the data subject type specified by the user
+  dataSubjectTypeCode?: string
+
+  // dataSubjectTypeUserInput is additional information provided by the user describing their relation to the business
+  dataSubjectTypeUserInput?: string
 }
 
 export interface InvokeRightRequest {
@@ -161,12 +167,6 @@ export interface InvokeRightRequest {
   jurisdictionCode: string
   rightCode: string
   user: User
-
-  // dataSubjectTypeCode is the identifier representing the data subject type specified by the user
-  dataSubjectTypeCode: string
-
-  // dataSubjectTypeUserInput is additional information provided by the user describing their relation to the business
-  dataSubjectTypeUserInput: string
 }
 
 export interface GetBootstrapConfigurationRequest {
