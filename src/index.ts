@@ -277,7 +277,8 @@ export enum IdentityFormat {
   IDENTITY_FORMAT_STRING,
   IDENTITY_FORMAT_JSON,
   IDENTITY_FORMAT_JWT,
-  IDENTITY_FORMAT_URL_ENCODED,
+  IDENTITY_FORMAT_QUERY,
+  IDENTITY_FORMAT_SEMICOLON,
 }
 
 // Identity represents all the metadata for an identifier on the page
