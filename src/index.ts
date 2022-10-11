@@ -260,35 +260,32 @@ export interface CanonicalPurpose {
 }
 
 // IdentityLocation is the location on the page from which to retrieve identity information
-export enum IdentityLocation {
-  IDENTITY_LOCATION_UNDEFINED,
-  IDENTITY_LOCATION_DATA_LAYER,
-  IDENTITY_LOCATION_WINDOW,
-  IDENTITY_LOCATION_COOKIE,
-  IDENTITY_LOCATION_MANAGED, // this is created if necessary and stored in a cookie with the associated name
-  IDENTITY_LOCATION_LOCAL_STORAGE,
-  IDENTITY_LOCATION_SESSION_STORAGE,
-  IDENTITY_LOCATION_QUERY_STRING,
+export enum IdentityType {
+  IDENTITY_TYPE_UNDEFINED = "",
+  IDENTITY_TYPE_DATA_LAYER = "dataLayer",
+  IDENTITY_TYPE_WINDOW = "window",
+  IDENTITY_TYPE_COOKIE = "cookie",
+  IDENTITY_TYPE_MANAGED = "managedCookie", // this is created if necessary and stored in a cookie with the associated name
+  IDENTITY_TYPE_LOCAL_STORAGE = "localStorage",
+  IDENTITY_TYPE_SESSION_STORAGE = "sessionStorage",
+  IDENTITY_TYPE_QUERY_STRING = "queryString",
 }
 
 // IdentityFormat is the encoding of the string identity value
 export enum IdentityFormat {
-  IDENTITY_FORMAT_UNDEFINED,
-  IDENTITY_FORMAT_STRING,
-  IDENTITY_FORMAT_JSON,
-  IDENTITY_FORMAT_JWT,
-  IDENTITY_FORMAT_QUERY,
-  IDENTITY_FORMAT_SEMICOLON,
+  IDENTITY_FORMAT_UNDEFINED = "",
+  IDENTITY_FORMAT_STRING = "string",
+  IDENTITY_FORMAT_JSON = "json",
+  IDENTITY_FORMAT_JWT = "jwt",
+  IDENTITY_FORMAT_QUERY = "query",
+  IDENTITY_FORMAT_SEMICOLON = "semicolon",
 }
 
 // Identity represents all the metadata for an identifier on the page
 export interface Identity {
 
-  // DEPRECATED: type is a string representing the location of the identity on the page
-  type?: string // deprecated
-
-  // location on the page from which to retrieve identity information
-  location?: IdentityLocation
+  // type is the location on the page from which to retrieve identity information
+  type: IdentityType
 
   // name is the identifier to look up the identity value in the specified location
   name: string
