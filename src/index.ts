@@ -287,8 +287,8 @@ export interface Identity {
   // type is the location on the page from which to retrieve identity information
   type: IdentityType
 
-  // name is the identifier to look up the identity value in the specified location
-  name: string
+  // variable is the name to look up the identity value in the specified location
+  variable: string
 
   // format is the encoding of the value
   format: IdentityFormat
