@@ -153,8 +153,8 @@ export interface User {
   // typeCode is the identifier representing the data subject type specified by the user
   typeCode?: string
 
-  // typeDescription is additional information provided by the user describing their relation to the business
-  typeDescription?: string
+  // typeRelationshipDetails is additional information provided by the user describing their relation to the business
+  typeRelationshipDetails?: string
 }
 
 export interface InvokeRightRequest {
