@@ -307,6 +307,15 @@ export interface PolicyDocument {
   url: string
 }
 
+export enum SwitchTextRenderLogic {
+  // SWITCH_TEXT_RENDER_ALL always renders the switch text regardless of state
+  SWITCH_TEXT_RENDER_ALL = 1,
+  // SWITCH_TEXT_RENDER_LEGAL_BASIS renders the switch text only if different from the legal basis default
+  SWITCH_TEXT_RENDER_LEGAL_BASIS = 2,
+  // SWITCH_TEXT_RENDER_CHANGE renders the switch only if the user changes the state of the switch
+  SWITCH_TEXT_RENDER_CHANGE = 3,
+}
+
 export interface Banner {
   title?: string
   footerDescription: string
@@ -326,7 +335,7 @@ export interface Modal {
   buttonText: string
 
   // consentTitle is the heading that goes above the list of purposes
-  // if not
+  // this optionally overrides the standard title
   consentTitle?: string
 
   // hideConsentTitle determines whether the consent title should be hidden. Default is to show
@@ -334,6 +343,15 @@ export interface Modal {
 
   // hideLegalBases determines whether the legal bases should be hidden. Default is to show
   hideLegalBases?: boolean
+
+  // switchOnText overrides the standard text for a consent switch in the on state
+  switchOnText?: string
+
+  // switchOffText overrides the standard text for a consent switch in the off state
+  switchOffText?: string
+
+  // switchTextRenderLogic determines the logic for showing the switch text
+  switchTextRenderLogic?: SwitchTextRenderLogic
 
   // additional extensions
   extensions?: { [key: string]: string }
@@ -368,6 +386,7 @@ export interface ConsentsTab {
   buttonText: string
 
   // consentTitle is the heading that goes above the list of purposes
+  // this optionally overrides the standard title
   consentTitle?: string
 
   // hideConsentTitle determines whether the consent title should be hidden. Default is to show
@@ -375,6 +394,15 @@ export interface ConsentsTab {
 
   // hideLegalBases determines whether the legal bases should be hidden. Default is to show
   hideLegalBases?: boolean
+
+  // switchOnText overrides the standard text for a consent switch in the on state
+  switchOnText?: string
+
+  // switchOffText overrides the standard text for a consent switch in the off state
+  switchOffText?: string
+
+  // switchTextRenderLogic determines the logic for showing the switch text
+  switchTextRenderLogic?: SwitchTextRenderLogic
 
   // additional extensions
   extensions?: { [key: string]: string }
@@ -461,11 +489,23 @@ export interface Theme {
   modalContentColor: string
   modalButtonColor: string
   modalPosition?: ModalPosition
+  // modalSwitchOnColor is the color of the consent switch in the on state for the modal
+  // this overrides standard theme colors
+  modalSwitchOnColor?: string
+  // modalSwitchOffColor is the color of the consent switch in the off state for the modal
+  // this overrides standard theme colors
+  modalSwitchOffColor?: string
 
   formHeaderBackgroundColor: string
   formHeaderContentColor?: string
   formContentColor: string
   formButtonColor: string
+  // formSwitchOnColor is the color of the consent switch in the on state for the form
+  // this overrides standard theme colors
+  formSwitchOnColor?: string
+  // formSwitchOffColor is the color of the consent switch in the off state for the form
+  // this overrides standard theme colors
+  formSwitchOffColor?: string
 }
 
 export interface VendorPurpose {
