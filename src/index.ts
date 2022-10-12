@@ -308,8 +308,11 @@ export interface PolicyDocument {
 }
 
 export enum SwitchTextRenderLogic {
+  // SWITCH_TEXT_RENDER_ALL always renders the switch text regardless of state
   SWITCH_TEXT_RENDER_ALL = 1,
+  // SWITCH_TEXT_RENDER_LEGAL_BASIS renders the switch text only if different from the legal basis default
   SWITCH_TEXT_RENDER_LEGAL_BASIS = 2,
+  // SWITCH_TEXT_RENDER_CHANGE renders the switch only if the user changes the state of the switch
   SWITCH_TEXT_RENDER_CHANGE = 3,
 }
 
