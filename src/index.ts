@@ -190,7 +190,8 @@ export interface SetConsentRequest {
   vendors?: string[] // list of vendor ids for which the user has opted out
 
   /**
-   * identityPriority is a map from the identity space code to the priority that should be used to resolve consent conflict
+   * identityPriority is a map from the identity space code to the priority that should be used to resolve consent
+   * conflict
    * lower values take top priority
    * if an identity space codes is not in the identityPriority map then it is the last priority
    */
@@ -349,7 +350,8 @@ export interface Purpose {
   legalBasisDescription?: string
 
   /**
-   * the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all data subject types
+   * the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all
+   * data subject types
    */
   dataSubjectTypeCodes?: string[]
 }
@@ -371,7 +373,7 @@ export enum IdentityType {
   IDENTITY_TYPE_DATA_LAYER = 'dataLayer',
   IDENTITY_TYPE_WINDOW = 'window',
   IDENTITY_TYPE_COOKIE = 'cookie',
-  IDENTITY_TYPE_MANAGED = 'managedCookie', // this is created if necessary and stored in a cookie with the associated name
+  IDENTITY_TYPE_MANAGED = 'managedCookie', // this is created if necessary and stored in a cookie with associated name
   IDENTITY_TYPE_LOCAL_STORAGE = 'localStorage',
   IDENTITY_TYPE_SESSION_STORAGE = 'sessionStorage',
   IDENTITY_TYPE_QUERY_STRING = 'queryString',
@@ -409,7 +411,8 @@ export interface Identity {
   format: IdentityFormat
 
   /**
-   * key is the identifier to find the identity within the value if the format is IDENTITY_FORMAT_STRING then key will be undefined
+   * key is the identifier to find the identity within the value if the format is IDENTITY_FORMAT_STRING then key
+   * will be undefined
    */
   key?: string
 
@@ -641,7 +644,8 @@ export interface Right {
   description: string
 
   /**
-   * the data subject types for which the right is relevant. If this list is empty then the right applies to all data subject types
+   * the data subject types for which the right is relevant. If this list is empty then the right applies to all
+   * data subject types
    */
   dataSubjectTypeCodes?: string[]
 }
@@ -692,12 +696,14 @@ export interface Theme {
   modalButtonColor: string
   modalPosition?: ModalPosition
   /**
-   * modalSwitchOnColor is the color of the consent switch in the on state for the modal this overrides standard theme colors
+   * modalSwitchOnColor is the color of the consent switch in the on state for the modal this overrides standard theme
+   * colors
    */
   modalSwitchOnColor?: string
 
   /**
-   * modalSwitchOffColor is the color of the consent switch in the off state for the modal this overrides standard theme colors
+   * modalSwitchOffColor is the color of the consent switch in the off state for the modal this overrides standard
+   * theme colors
    */
   modalSwitchOffColor?: string
 
@@ -706,11 +712,13 @@ export interface Theme {
   formContentColor: string
   formButtonColor: string
   /**
-   * formSwitchOnColor is the color of the consent switch in the on state for the form this overrides standard theme colors
+   * formSwitchOnColor is the color of the consent switch in the on state for the form this overrides standard theme
+   * colors
    */
   formSwitchOnColor?: string
   /**
-   * formSwitchOffColor is the color of the consent switch in the off state for the form this overrides standard theme colors
+   * formSwitchOffColor is the color of the consent switch in the off state for the form this overrides standard theme
+   * colors
    */
   formSwitchOffColor?: string
 }
