@@ -820,7 +820,7 @@ function fetchOptions(method: string, body?: any): RequestInit {
  */
 export async function getLocation(baseUrl: string): Promise<GetLocationResponse> {
   const url = `/ip`
-  const resp = await fetch(baseUrl + url, fetchOptions('GET'));
+  const resp = await fetch(baseUrl + url, fetchOptions('GET'))
   return resp as GetLocationResponse
 }
 
@@ -845,7 +845,10 @@ export async function getBootstrapConfiguration(
  * @param baseUrl The base URL of the web API server
  * @param request The configuration request
  */
-export async function getFullConfiguration(baseUrl: string, request: GetFullConfigurationRequest): Promise<Configuration> {
+export async function getFullConfiguration(
+  baseUrl: string,
+  request: GetFullConfigurationRequest,
+): Promise<Configuration> {
   // eslint-disable-next-line max-len
   const url = `/config/${request.organizationCode}/${request.propertyCode}/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}/config.json`
   const resp = await fetch(baseUrl + url, fetchOptions('GET'))
