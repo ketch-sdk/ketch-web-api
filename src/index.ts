@@ -368,28 +368,19 @@ export interface CanonicalPurpose {
 /**
  * IdentityLocation is the location on the page from which to retrieve identity information
  */
-export enum IdentityType {
-  IDENTITY_TYPE_UNDEFINED = '',
-  IDENTITY_TYPE_DATA_LAYER = 'dataLayer',
-  IDENTITY_TYPE_WINDOW = 'window',
-  IDENTITY_TYPE_COOKIE = 'cookie',
-  IDENTITY_TYPE_MANAGED = 'managedCookie', // this is created if necessary and stored in a cookie with associated name
-  IDENTITY_TYPE_LOCAL_STORAGE = 'localStorage',
-  IDENTITY_TYPE_SESSION_STORAGE = 'sessionStorage',
-  IDENTITY_TYPE_QUERY_STRING = 'queryString',
-}
+export type IdentityType =
+  | 'dataLayer'
+  | 'window'
+  | 'cookie'
+  | 'managedCookie'
+  | 'localStorage'
+  | 'sessionStorage'
+  | 'queryString'
 
 /**
  * IdentityFormat is the encoding of the string identity value
  */
-export enum IdentityFormat {
-  IDENTITY_FORMAT_UNDEFINED = '',
-  IDENTITY_FORMAT_STRING = 'string',
-  IDENTITY_FORMAT_JSON = 'json',
-  IDENTITY_FORMAT_JWT = 'jwt',
-  IDENTITY_FORMAT_QUERY = 'query',
-  IDENTITY_FORMAT_SEMICOLON = 'semicolon',
-}
+export type IdentityFormat = 'string' | 'json' | 'jwt' | 'query' | 'semicolon'
 
 /**
  * Identity represents all the metadata for an identifier on the page
@@ -408,7 +399,7 @@ export interface Identity {
   /**
    * format is the encoding of the value
    */
-  format: IdentityFormat
+  format?: IdentityFormat
 
   /**
    * key is the identifier to find the identity within the value if the format is IDENTITY_FORMAT_STRING then key

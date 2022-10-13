@@ -7,7 +7,6 @@
 .prettierrc
 docs/
 jest.config.js
-src/
 test-reports/
 tsconfig.json
 tsfmt.json

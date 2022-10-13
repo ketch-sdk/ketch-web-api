@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "ncc build --minify --license licenses.txt src/index.ts",
     "lint": "eslint src/**/*.ts",
