@@ -1,8 +1,8 @@
 /* eslint-disable jest/valid-expect */
-jest.mock('../src/lib/fetch')
+jest.mock('./fetch')
 
-import fetch from '../src/lib/fetch'
-jest.mock('../src/lib/fetch')
+import fetch from './fetch'
+jest.mock('./fetch')
 
 const mockFetch = jest.mocked(fetch)
 
