@@ -1,7 +1,13 @@
-.github/
 .editorconfig
 .eslintignore
 .eslintrc.json
+.gitattributes
+.github/
+.prettierignore
+.prettierrc
+docs/
 jest.config.js
+src/
+test-reports/
 tsconfig.json
 tsfmt.json
