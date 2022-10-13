@@ -1,21 +1,33 @@
-import fetch from './lib/fetch'
+import fetch from './fetch'
 
+/**
+ * ExperienceDefault
+ */
 export enum ExperienceDefault {
   BANNER = 1,
   MODAL,
 }
 
+/**
+ * ExperienceButtonDestination
+ */
 export enum ExperienceButtonDestination {
   GOTO_MODAL = 1,
   GOTO_PREFERENCE = 2,
   REJECT_ALL = 3,
 }
 
+/**
+ * ExperiencePrimaryButtonAction
+ */
 export enum ExperiencePrimaryButtonAction {
   SAVE_CURRENT_STATE = 1,
   ACCEPT_ALL = 2,
 }
 
+/**
+ * MigrationOption
+ */
 export enum MigrationOption {
   MIGRATE_DEFAULT,
   MIGRATE_NEVER,
@@ -24,16 +36,25 @@ export enum MigrationOption {
   MIGRATE_ALWAYS,
 }
 
+/**
+ * CookieDuration
+ */
 export enum CookieDuration {
   SESSION = 1,
   PERSISTENT,
 }
 
+/**
+ * CookieProvenance
+ */
 export enum CookieProvenance {
   FIRST_PARTY = 1,
   THIRD_PARTY,
 }
 
+/**
+ * CookieCategory
+ */
 export enum CookieCategory {
   STRICTLY_NECESSARY = 1,
   FUNCTIONAL,
@@ -51,12 +72,18 @@ export enum CookieCategory {
 //   error: Error;
 // }
 
+/**
+ * IPLanguage
+ */
 export interface IPLanguage {
   code: string
   name: string
   native: string
 }
 
+/**
+ * IPLocation
+ */
 export interface IPLocation {
   geonameId: number
   capital: string
@@ -68,6 +95,9 @@ export interface IPLocation {
   isEU: boolean
 }
 
+/**
+ * IPInfo
+ */
 export interface IPInfo {
   ip: string
   hostname: string
@@ -84,27 +114,45 @@ export interface IPInfo {
   location: IPLocation
 }
 
+/**
+ * GetLocationRequest
+ */
 export interface GetLocationRequest {
   IP?: string
 }
 
+/**
+ * GetLocationResponse
+ */
 export interface GetLocationResponse {
   location: IPInfo
 }
 
+/**
+ * PurposeLegalBasis
+ */
 export interface PurposeLegalBasis {
   legalBasisCode: string
 }
 
+/**
+ * PurposeAllowed
+ */
 export interface PurposeAllowed {
   allowed: string
 }
 
+/**
+ * PurposeAllowedLegalBasis
+ */
 export interface PurposeAllowedLegalBasis {
   allowed: string
   legalBasisCode: string
 }
 
+/**
+ * GetConsentRequest
+ */
 export interface GetConsentRequest {
   organizationCode: string
   controllerCode?: string
@@ -115,11 +163,20 @@ export interface GetConsentRequest {
   purposes: { [key: string]: PurposeLegalBasis }
 }
 
+/**
+ * GetConsentResponse
+ */
 export interface GetConsentResponse {
   purposes: { [key: string]: PurposeAllowed | string }
-  vendors?: string[] // list of vendor ids for which the user has opted out
+  /**
+   * list of vendor ids for which the user has opted out
+   */
+  vendors?: string[]
 }
 
+/**
+ * SetConsentRequest
+ */
 export interface SetConsentRequest {
   organizationCode: string
   controllerCode?: string
@@ -132,12 +189,18 @@ export interface SetConsentRequest {
   purposes: { [key: string]: PurposeAllowedLegalBasis }
   vendors?: string[] // list of vendor ids for which the user has opted out
 
-  // identityPriority is a map from the identity space code to the priority that should be used to resolve consent conflict
-  // lower values take top priority
-  // if an identity space codes is not in the identityPriority map then it is the last priority
-  identityPriority: { [key: string]: number }
+  /**
+   * identityPriority is a map from the identity space code to the priority that should be used to resolve consent
+   * conflict
+   * lower values take top priority
+   * if an identity space codes is not in the identityPriority map then it is the last priority
+   */
+  identityPriority?: { [key: string]: number }
 }
 
+/**
+ * User
+ */
 export interface User {
   email: string
   first: string
@@ -150,13 +213,20 @@ export interface User {
   addressLine1?: string
   addressLine2?: string
 
-  // typeCode is the identifier representing the data subject type specified by the user
+  /**
+   * typeCode is the identifier representing the data subject type specified by the user
+   */
   typeCode?: string
 
-  // typeRelationshipDetails is additional information provided by the user describing their relation to the business
+  /**
+   * typeRelationshipDetails is additional information provided by the user describing their relation to the business
+   */
   typeRelationshipDetails?: string
 }
 
+/**
+ * InvokeRightRequest
+ */
 export interface InvokeRightRequest {
   organizationCode: string
   controllerCode?: string
@@ -169,11 +239,17 @@ export interface InvokeRightRequest {
   user: User
 }
 
+/**
+ * GetBootstrapConfigurationRequest
+ */
 export interface GetBootstrapConfigurationRequest {
   organizationCode: string
   propertyCode: string
 }
 
+/**
+ * GetFullConfigurationRequest
+ */
 export interface GetFullConfigurationRequest {
   organizationCode: string
   propertyCode: string
@@ -184,10 +260,16 @@ export interface GetFullConfigurationRequest {
   languageCode: string
 }
 
+/**
+ * Organization
+ */
 export interface Organization {
   code: string
 }
 
+/**
+ * JurisdictionInfo
+ */
 export interface JurisdictionInfo {
   code?: string
   defaultScopeCode?: string
@@ -195,23 +277,35 @@ export interface JurisdictionInfo {
   scopes?: { [key: string]: string }
 }
 
+/**
+ * Property
+ */
 export interface Property {
   code?: string
   name?: string
   platform?: string
 }
 
+/**
+ * Environment
+ */
 export interface Environment {
   code: string
   pattern?: string
   hash?: string
 }
 
+/**
+ * Deployment
+ */
 export interface Deployment {
   code: string
   version: number
 }
 
+/**
+ * Cookie
+ */
 export interface Cookie {
   name: string
   code: string
@@ -225,6 +319,9 @@ export interface Cookie {
   version: number
 }
 
+/**
+ * PurposeCategory
+ */
 export type PurposeCategory = {
   name: string
   description: string
@@ -232,6 +329,9 @@ export type PurposeCategory = {
   externalTransfers: string
 }
 
+/**
+ * Purpose
+ */
 export interface Purpose {
   code: string
   name?: string
@@ -249,73 +349,109 @@ export interface Purpose {
   legalBasisName?: string
   legalBasisDescription?: string
 
-  // the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all data subject types
+  /**
+   * the data subject types for which the purpose is relevant. If this list is empty then the purpose applies to all
+   * data subject types
+   */
   dataSubjectTypeCodes?: string[]
 }
 
+/**
+ * CanonicalPurpose
+ */
 export interface CanonicalPurpose {
   code: string
   name: string
   purposeCodes?: string[]
 }
 
-// IdentityLocation is the location on the page from which to retrieve identity information
+/**
+ * IdentityLocation is the location on the page from which to retrieve identity information
+ */
 export enum IdentityType {
-  IDENTITY_TYPE_UNDEFINED = "",
-  IDENTITY_TYPE_DATA_LAYER = "dataLayer",
-  IDENTITY_TYPE_WINDOW = "window",
-  IDENTITY_TYPE_COOKIE = "cookie",
-  IDENTITY_TYPE_MANAGED = "managedCookie", // this is created if necessary and stored in a cookie with the associated name
-  IDENTITY_TYPE_LOCAL_STORAGE = "localStorage",
-  IDENTITY_TYPE_SESSION_STORAGE = "sessionStorage",
-  IDENTITY_TYPE_QUERY_STRING = "queryString",
+  IDENTITY_TYPE_UNDEFINED = '',
+  IDENTITY_TYPE_DATA_LAYER = 'dataLayer',
+  IDENTITY_TYPE_WINDOW = 'window',
+  IDENTITY_TYPE_COOKIE = 'cookie',
+  IDENTITY_TYPE_MANAGED = 'managedCookie', // this is created if necessary and stored in a cookie with associated name
+  IDENTITY_TYPE_LOCAL_STORAGE = 'localStorage',
+  IDENTITY_TYPE_SESSION_STORAGE = 'sessionStorage',
+  IDENTITY_TYPE_QUERY_STRING = 'queryString',
 }
 
-// IdentityFormat is the encoding of the string identity value
+/**
+ * IdentityFormat is the encoding of the string identity value
+ */
 export enum IdentityFormat {
-  IDENTITY_FORMAT_UNDEFINED = "",
-  IDENTITY_FORMAT_STRING = "string",
-  IDENTITY_FORMAT_JSON = "json",
-  IDENTITY_FORMAT_JWT = "jwt",
-  IDENTITY_FORMAT_QUERY = "query",
-  IDENTITY_FORMAT_SEMICOLON = "semicolon",
+  IDENTITY_FORMAT_UNDEFINED = '',
+  IDENTITY_FORMAT_STRING = 'string',
+  IDENTITY_FORMAT_JSON = 'json',
+  IDENTITY_FORMAT_JWT = 'jwt',
+  IDENTITY_FORMAT_QUERY = 'query',
+  IDENTITY_FORMAT_SEMICOLON = 'semicolon',
 }
 
-// Identity represents all the metadata for an identifier on the page
+/**
+ * Identity represents all the metadata for an identifier on the page
+ */
 export interface Identity {
-
-  // type is the location on the page from which to retrieve identity information
+  /**
+   * type is the location on the page from which to retrieve identity information
+   */
   type: IdentityType
 
-  // variable is the name to look up the identity value in the specified location
+  /**
+   * variable is the name to look up the identity value in the specified location
+   */
   variable: string
 
-  // format is the encoding of the value
+  /**
+   * format is the encoding of the value
+   */
   format: IdentityFormat
 
-  // key is the identifier to find the identity within the value
-  // if the format is IDENTITY_FORMAT_STRING then key will be undefined
+  /**
+   * key is the identifier to find the identity within the value if the format is IDENTITY_FORMAT_STRING then key
+   * will be undefined
+   */
   key?: string
 
-  // priority of the identity for consent conflict resolution
+  /**
+   * priority of the identity for consent conflict resolution
+   */
   priority?: number
 }
 
+/**
+ * PolicyDocument
+ */
 export interface PolicyDocument {
   code: string
   version: number
   url: string
 }
 
+/**
+ * SwitchTextRenderLogic
+ */
 export enum SwitchTextRenderLogic {
-  // SWITCH_TEXT_RENDER_ALL always renders the switch text regardless of state
+  /**
+   * SWITCH_TEXT_RENDER_ALL always renders the switch text regardless of state
+   */
   SWITCH_TEXT_RENDER_ALL = 1,
-  // SWITCH_TEXT_RENDER_LEGAL_BASIS renders the switch text only if different from the legal basis default
+  /**
+   * SWITCH_TEXT_RENDER_LEGAL_BASIS renders the switch text only if different from the legal basis default
+   */
   SWITCH_TEXT_RENDER_LEGAL_BASIS = 2,
-  // SWITCH_TEXT_RENDER_CHANGE renders the switch only if the user changes the state of the switch
+  /**
+   * SWITCH_TEXT_RENDER_CHANGE renders the switch only if the user changes the state of the switch
+   */
   SWITCH_TEXT_RENDER_CHANGE = 3,
 }
 
+/**
+ * Banner
+ */
 export interface Banner {
   title?: string
   footerDescription: string
@@ -324,39 +460,60 @@ export interface Banner {
   secondaryButtonText?: string
   secondaryButtonDestination?: ExperienceButtonDestination
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
+/**
+ * Modal
+ */
 export interface Modal {
   title: string
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
 
-  // consentTitle is the heading that goes above the list of purposes
-  // this optionally overrides the standard title
+  /**
+   * consentTitle is the heading that goes above the list of purposes this optionally overrides the standard title
+   */
   consentTitle?: string
 
-  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  /**
+   * hideConsentTitle determines whether the consent title should be hidden. Default is to show
+   */
   hideConsentTitle?: boolean
 
-  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  /**
+   * hideLegalBases determines whether the legal bases should be hidden. Default is to show
+   */
   hideLegalBases?: boolean
 
-  // switchOnText overrides the standard text for a consent switch in the on state
+  /**
+   * switchOnText overrides the standard text for a consent switch in the on state
+   */
   switchOnText?: string
 
-  // switchOffText overrides the standard text for a consent switch in the off state
+  /**
+   * switchOffText overrides the standard text for a consent switch in the off state
+   */
   switchOffText?: string
 
-  // switchTextRenderLogic determines the logic for showing the switch text
+  /**
+   * switchTextRenderLogic determines the logic for showing the switch text
+   */
   switchTextRenderLogic?: SwitchTextRenderLogic
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
+/**
+ * JIT
+ */
 export interface JIT {
   title?: string
   bodyDescription?: string
@@ -365,7 +522,9 @@ export interface JIT {
   moreInfoText?: string
   moreInfoDestination?: ExperienceButtonDestination
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
@@ -375,36 +534,55 @@ export interface RightsTab {
   bodyDescription?: string
   buttonText: string
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
+/**
+ * ConsentsTab
+ */
 export interface ConsentsTab {
   tabName: string
   bodyTitle?: string
   bodyDescription?: string
   buttonText: string
 
-  // consentTitle is the heading that goes above the list of purposes
-  // this optionally overrides the standard title
+  /**
+   * consentTitle is the heading that goes above the list of purposes
+   * this optionally overrides the standard title
+   */
   consentTitle?: string
 
-  // hideConsentTitle determines whether the consent title should be hidden. Default is to show
+  /**
+   * hideConsentTitle determines whether the consent title should be hidden. Default is to show
+   */
   hideConsentTitle?: boolean
 
-  // hideLegalBases determines whether the legal bases should be hidden. Default is to show
+  /**
+   * hideLegalBases determines whether the legal bases should be hidden. Default is to show
+   */
   hideLegalBases?: boolean
 
-  // switchOnText overrides the standard text for a consent switch in the on state
+  /**
+   * switchOnText overrides the standard text for a consent switch in the on state
+   */
   switchOnText?: string
 
-  // switchOffText overrides the standard text for a consent switch in the off state
+  /**
+   * switchOffText overrides the standard text for a consent switch in the off state
+   */
   switchOffText?: string
 
-  // switchTextRenderLogic determines the logic for showing the switch text
+  /**
+   * switchTextRenderLogic determines the logic for showing the switch text
+   */
   switchTextRenderLogic?: SwitchTextRenderLogic
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
@@ -413,7 +591,9 @@ export interface OverviewTab {
   bodyTitle?: string
   bodyDescription: string
 
-  // additional extensions
+  /**
+   * additional extensions
+   * */
   extensions?: { [key: string]: string }
 }
 
@@ -425,10 +605,14 @@ export interface ConsentExperience {
   jit?: JIT
   experienceDefault: ExperienceDefault
 
-  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  /**
+   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+   */
   showCloseIcon?: boolean
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
@@ -440,27 +624,43 @@ export interface PreferenceExperience {
   consents?: ConsentsTab
   overview: OverviewTab
 
-  // showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+  /**
+   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+   */
   showCloseIcon?: boolean
 
-  // additional extensions
+  /**
+   * additional extensions
+   */
   extensions?: { [key: string]: string }
 }
 
+/**
+ * Right
+ */
 export interface Right {
   code: string
   name: string
   description: string
 
-  // the data subject types for which the right is relevant. If this list is empty then the right applies to all data subject types
+  /**
+   * the data subject types for which the right is relevant. If this list is empty then the right applies to all
+   * data subject types
+   */
   dataSubjectTypeCodes?: string[]
 }
 
+/**
+ * Experience
+ */
 export interface Experience {
   consent?: ConsentExperience
   preference?: PreferenceExperience
 }
 
+/**
+ * BannerPosition
+ */
 export enum BannerPosition {
   BOTTOM = 1,
   TOP = 2,
@@ -468,12 +668,18 @@ export enum BannerPosition {
   BOTTOM_RIGHT = 4,
 }
 
+/**
+ * ModalPosition
+ */
 export enum ModalPosition {
   CENTER = 1,
   LEFT_FULL_HEIGHT = 2,
   RIGHT_FULL_HEIGHT = 3,
 }
 
+/**
+ * Theme
+ */
 export interface Theme {
   watermark?: boolean
   buttonBorderRadius: number
@@ -489,22 +695,31 @@ export interface Theme {
   modalContentColor: string
   modalButtonColor: string
   modalPosition?: ModalPosition
-  // modalSwitchOnColor is the color of the consent switch in the on state for the modal
-  // this overrides standard theme colors
+  /**
+   * modalSwitchOnColor is the color of the consent switch in the on state for the modal this overrides standard theme
+   * colors
+   */
   modalSwitchOnColor?: string
-  // modalSwitchOffColor is the color of the consent switch in the off state for the modal
-  // this overrides standard theme colors
+
+  /**
+   * modalSwitchOffColor is the color of the consent switch in the off state for the modal this overrides standard
+   * theme colors
+   */
   modalSwitchOffColor?: string
 
   formHeaderBackgroundColor: string
   formHeaderContentColor?: string
   formContentColor: string
   formButtonColor: string
-  // formSwitchOnColor is the color of the consent switch in the on state for the form
-  // this overrides standard theme colors
+  /**
+   * formSwitchOnColor is the color of the consent switch in the on state for the form this overrides standard theme
+   * colors
+   */
   formSwitchOnColor?: string
-  // formSwitchOffColor is the color of the consent switch in the off state for the form
-  // this overrides standard theme colors
+  /**
+   * formSwitchOffColor is the color of the consent switch in the off state for the form this overrides standard theme
+   * colors
+   */
   formSwitchOffColor?: string
 }
 
@@ -529,24 +744,37 @@ export interface Vendor {
   usesNonCookieAccess?: boolean
 }
 
-// DataSubjectType represents user defined data subject types with code as the unique identifier
+/**
+ * DataSubjectType represents user defined data subject types with code as the unique identifier
+ */
 export interface DataSubjectType {
   code: string
   name: string
 
-  // requiresUserInput is true if additional information must be requested to describe the data subject relation
+  /**
+   * requiresUserInput is true if additional information must be requested to describe the data subject relation
+   */
   requiresUserInput: boolean
 }
 
-// Stack represents a grouping of purposes to be displayed in an experience
+/**
+ * Stack represents a grouping of purposes to be displayed in an experience
+ */
 export interface Stack {
-  // name of the stack to be displayed
+  /**
+   * name of the stack to be displayed
+   */
   name: string
 
-  // list of purpose codes that are members of the stack
+  /**
+   * list of purpose codes that are members of the stack
+   */
   purposeCodes: string[]
 }
 
+/**
+ * Configuration
+ */
 export interface Configuration {
   language?: string
   organization: Organization
@@ -593,42 +821,78 @@ function fetchOptions(method: string, body?: any): RequestInit {
   return options
 }
 
-// Get location details based on the IP address.
-export function getLocation(baseUrl: string): Promise<GetLocationResponse> {
+/**
+ * Get location details based on the IP address.
+ *
+ * @param baseUrl The base URL of the web API server
+ */
+export async function getLocation(baseUrl: string): Promise<GetLocationResponse> {
   const url = `/ip`
-  return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as GetLocationResponse)
+  const resp = await fetch(baseUrl + url, fetchOptions('GET'))
+  return resp as GetLocationResponse
 }
 
-// Gets the bootstrap configuration for the specified parameters.
-export function getBootstrapConfiguration(
+/**
+ * Gets the bootstrap configuration for the specified parameters.
+ *
+ * @param baseUrl The base URL of the web API server
+ * @param request The configuration request
+ */
+export async function getBootstrapConfiguration(
   baseUrl: string,
   request: GetBootstrapConfigurationRequest,
 ): Promise<Configuration> {
   const url = `/config/${request.organizationCode}/${request.propertyCode}/boot.json`
-  return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration)
+  const resp = await fetch(baseUrl + url, fetchOptions('GET'))
+  return resp as Configuration
 }
 
-// Gets the full configuration for the specified parameters.
-export function getFullConfiguration(baseUrl: string, request: GetFullConfigurationRequest): Promise<Configuration> {
+/**
+ * Gets the full configuration for the specified parameters.
+ *
+ * @param baseUrl The base URL of the web API server
+ * @param request The configuration request
+ */
+export async function getFullConfiguration(
+  baseUrl: string,
+  request: GetFullConfigurationRequest,
+): Promise<Configuration> {
   // eslint-disable-next-line max-len
   const url = `/config/${request.organizationCode}/${request.propertyCode}/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}/config.json`
-  return fetch(baseUrl + url, fetchOptions('GET')).then((resp: any) => resp as Configuration)
+  const resp = await fetch(baseUrl + url, fetchOptions('GET'))
+  return resp as Configuration
 }
 
-// Gets the current state of the user's consent flags.
-export function getConsent(baseUrl: string, request: GetConsentRequest): Promise<GetConsentResponse> {
+/**
+ *  Gets the current state of the user's consent flags.
+ *
+ * @param baseUrl The base URL of the web API server
+ * @param request The user consent request
+ */
+export async function getConsent(baseUrl: string, request: GetConsentRequest): Promise<GetConsentResponse> {
   const url = `/consent/${request.organizationCode}/get`
-  return fetch(baseUrl + url, fetchOptions('POST', request)).then((resp: any) => resp as GetConsentResponse)
+  const resp = await fetch(baseUrl + url, fetchOptions('POST', request))
+  return resp as GetConsentResponse
 }
 
-// Sets the user's consent flags.
-export function setConsent(baseUrl: string, request: SetConsentRequest): Promise<void> {
+/**
+ * Sets the user's consent flags.
+ *
+ * @param baseUrl The base URL of the web API server
+ * @param request The use consent request
+ */
+export async function setConsent(baseUrl: string, request: SetConsentRequest): Promise<void> {
   const url = `/consent/${request.organizationCode}/update`
-  return fetch(baseUrl + url, fetchOptions('POST', request)).then(() => {})
+  await fetch(baseUrl + url, fetchOptions('POST', request))
 }
 
-// Invokes the specified rights.
-export function invokeRight(baseUrl: string, request: InvokeRightRequest): Promise<void> {
+/**
+ * Invokes the specified rights.
+ *
+ * @param baseUrl The base URL of the web API server
+ * @param request The request to invoke.
+ */
+export async function invokeRight(baseUrl: string, request: InvokeRightRequest): Promise<void> {
   const url = `/rights/${request.organizationCode}/invoke`
-  return fetch(baseUrl + url, fetchOptions('POST', request)).then(() => {})
+  await fetch(baseUrl + url, fetchOptions('POST', request))
 }
