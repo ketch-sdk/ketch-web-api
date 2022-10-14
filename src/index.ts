@@ -314,9 +314,9 @@ export interface Cookie {
   provenance: CookieProvenance
   category: CookieCategory
   description: string
-  serviceProvider: string
-  latest: boolean
-  version: number
+  serviceProvider?: string
+  latest?: boolean
+  version?: number
 }
 
 /**
@@ -447,6 +447,10 @@ export enum SwitchTextRenderLogic {
    * SWITCH_TEXT_RENDER_CHANGE renders the switch only if the user changes the state of the switch
    */
   SWITCH_TEXT_RENDER_CHANGE = 3,
+  /**
+   * SWITCH_TEXT_RENDER_NEVER never renders the switch text
+   */
+  SWITCH_TEXT_RENDER_NEVER = 4,
 }
 
 /**
@@ -459,6 +463,11 @@ export interface Banner {
   primaryButtonAction?: ExperiencePrimaryButtonAction
   secondaryButtonText?: string
   secondaryButtonDestination?: ExperienceButtonDestination
+
+  /**
+   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+   */
+  showCloseIcon?: boolean
 
   /**
    * additional extensions
@@ -506,6 +515,11 @@ export interface Modal {
   switchTextRenderLogic?: SwitchTextRenderLogic
 
   /**
+   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+   */
+  showCloseIcon?: boolean
+
+  /**
    * additional extensions
    */
   extensions?: { [key: string]: string }
@@ -521,6 +535,11 @@ export interface JIT {
   declineButtonText: string
   moreInfoText?: string
   moreInfoDestination?: ExperienceButtonDestination
+
+  /**
+   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
+   */
+  showCloseIcon?: boolean
 
   /**
    * additional extensions
@@ -606,11 +625,6 @@ export interface ConsentExperience {
   experienceDefault: ExperienceDefault
 
   /**
-   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
-   */
-  showCloseIcon?: boolean
-
-  /**
    * additional extensions
    */
   extensions?: { [key: string]: string }
@@ -623,11 +637,6 @@ export interface PreferenceExperience {
   rights?: RightsTab
   consents?: ConsentsTab
   overview: OverviewTab
-
-  /**
-   * showCloseIcon determines whether the x out icon appears in the experience. Default do not show
-   */
-  showCloseIcon?: boolean
 
   /**
    * additional extensions
