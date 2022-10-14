@@ -730,6 +730,15 @@ export interface Theme {
    * colors
    */
   formSwitchOffColor?: string
+
+  /**
+   * qrBackgroundColor is the override for the QR code background color
+   */
+  qrBackgroundColor?: string
+  /**
+   * qrForegroundColor is the override for the QR code foreground color
+   */
+  qrForegroundColor?: string
 }
 
 export interface VendorPurpose {
