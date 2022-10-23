@@ -4,9 +4,11 @@ import {
   GetConsentRequest,
   GetConsentResponse,
   GetFullConfigurationRequest,
-  GetLocationResponse, GetPreferenceQRRequest,
+  GetLocationResponse,
+  GetPreferenceQRRequest,
   InvokeRightRequest,
-  SetConsentRequest, WebReportRequest,
+  SetConsentRequest,
+  WebReportRequest,
 } from '@ketch-sdk/ketch-types'
 
 export interface KetchWebAPIOptions {
@@ -17,8 +19,8 @@ export interface KetchWebAPIOptions {
  * KetchWebAPI is a client for the Ketch Web API.
  */
 export class KetchWebAPI {
-  private readonly _baseUrl: string;
-  private _options: KetchWebAPIOptions;
+  private readonly _baseUrl: string
+  private _options: KetchWebAPIOptions
 
   /**
    * Create a new KetchWebAPI with the given base url
@@ -58,7 +60,7 @@ export class KetchWebAPI {
    * @param request The configuration request
    */
   async getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
-    let fullDetails = ""
+    let fullDetails = ''
 
     if (request.environmentCode && request.hash && request.jurisdictionCode && request.languageCode) {
       fullDetails = `/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}`
@@ -157,12 +159,12 @@ export class KetchWebAPI {
     if (body != null) {
       options.body = JSON.stringify(body)
       options.headers = {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       }
     } else {
       options.headers = {
-        'Accept': 'application/json',
+        Accept: 'application/json',
       }
     }
 
