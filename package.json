@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "Ketch TypeScript Web API",
   "main": "dist/index.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "ncc build --minify --license licenses.txt src/index.ts",
     "lint": "eslint src/**/*.ts",
@@ -43,5 +42,8 @@
     "ts-jest": "^29.0.3",
     "typedoc": "^0.23.17",
     "typescript": "^4.8.4"
-  }
+  },
+  "files": [
+    "./dist/"
+  ]
 }
