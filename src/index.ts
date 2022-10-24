@@ -147,12 +147,12 @@ export class KetchWebAPI {
     if (body) {
       options.body = JSON.stringify(body)
       options.headers = {
-        'Accept': json,
+        Accept: json,
         'Content-Type': json,
       }
     } else {
       options.headers = {
-        'Accept': json,
+        Accept: json,
       }
     }
 
