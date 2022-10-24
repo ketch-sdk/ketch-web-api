@@ -31,7 +31,7 @@ export class KetchWebAPI {
   constructor(baseUrl: string, options?: KetchWebAPIOptions) {
     this._baseUrl = baseUrl
     this._options = options || {
-      fetch,
+      fetch: (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => window.fetch(input, init),
     }
   }
 
