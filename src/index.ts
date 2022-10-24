@@ -11,28 +11,19 @@ import {
   WebReportRequest,
 } from '@ketch-sdk/ketch-types'
 
-export interface KetchWebAPIOptions {
-  fetch: (url: string, fetchOptions: RequestInit) => Promise<any>
-}
-
 /**
  * KetchWebAPI is a client for the Ketch Web API.
  */
 export class KetchWebAPI {
   private readonly _baseUrl: string
-  private _options: KetchWebAPIOptions
 
   /**
    * Create a new KetchWebAPI with the given base url
    *
    * @param baseUrl The base url of the Ketch Web API
-   * @param options The KetchWebAPI options
    */
-  constructor(baseUrl: string, options?: KetchWebAPIOptions) {
+  constructor(baseUrl: string) {
     this._baseUrl = baseUrl
-    this._options = options || {
-      fetch: (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => window.fetch(input, init),
-    }
   }
 
   /**
@@ -137,16 +128,11 @@ export class KetchWebAPI {
   }
 
   private async get(url: string): Promise<any> {
-    return this.fetch(url, this.fetchOptions('GET'))
+    return fetch(this._baseUrl + url, this.fetchOptions('GET')).then(x => x.json())
   }
 
   private async post(url: string, request: any): Promise<any> {
-    return this.fetch(url, this.fetchOptions('POST', request))
-  }
-
-  private async fetch(url: string, fetchOptions: RequestInit): Promise<any> {
-    const resp = await this._options.fetch(this._baseUrl + url, fetchOptions)
-    return resp.json()
+    return fetch(this._baseUrl + url, this.fetchOptions('POST', request)).then(x => x.json())
   }
 
   private fetchOptions(method: string, body?: any): RequestInit {
@@ -156,15 +142,17 @@ export class KetchWebAPI {
       credentials: 'omit',
     }
 
-    if (body != null) {
+    const json = 'application/json'
+
+    if (body) {
       options.body = JSON.stringify(body)
       options.headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: json,
+        'Content-Type': json,
       }
     } else {
       options.headers = {
-        Accept: 'application/json',
+        Accept: json,
       }
     }
 
