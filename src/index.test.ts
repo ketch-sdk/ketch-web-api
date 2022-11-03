@@ -225,8 +225,8 @@ describe('@ketch-com/ketch-web-api', () => {
           rightCode: 'gdpr_portability',
           user: {
             email: 'ignore.me@ketch.com',
-            first: 'Just"',
-            last: 'Testing',
+            firstName: 'Just"',
+            lastName: 'Testing',
             country: 'FR',
             stateRegion: 'France',
             description: 'Ignore me',
@@ -236,7 +236,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
       const options = {
         /*eslint-disable max-len*/
-        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"},"jurisdictionCode":"gdpreea","rightCode":"gdpr_portability","user":{"email":"ignore.me@ketch.com","first":"Just\\"","last":"Testing","country":"FR","stateRegion":"France","description":"Ignore me"}}',
+        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"},"jurisdictionCode":"gdpreea","rightCode":"gdpr_portability","user":{"email":"ignore.me@ketch.com","firstName":"Just\\"","lastName":"Testing","country":"FR","stateRegion":"France","description":"Ignore me"}}',
         credentials: 'omit',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         method: 'POST',
