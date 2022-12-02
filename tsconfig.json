@@ -17,6 +17,7 @@
     "removeComments": false,
     "rootDir": "./src",
     "strict": true,
+    "skipLibCheck": true,
     "target": "ES2015"
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
