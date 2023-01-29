@@ -192,13 +192,12 @@ describe('@ketch-com/ketch-web-api', () => {
               legalBasisCode: 'consent_optin',
             },
           },
-          migrationOption: 1,
         }),
       ).resolves.toBeUndefined()
 
       const options = {
         /*eslint-disable max-len*/
-        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"},"jurisdictionCode":"","purposes":{"coreprodserv":{"allowed":"true","legalBasisCode":"legitimateinterest"},"prodservenhance":{"allowed":"true","legalBasisCode":"consent_optin"},"hschat":{"allowed":"false","legalBasisCode":"consent_optin"},"bizsiteanalytics":{"allowed":"false","legalBasisCode":"consent_optin"},"persads":{"allowed":"false","legalBasisCode":"consent_optin"},"personzation":{"allowed":"false","legalBasisCode":"consent_optin"}},"migrationOption":1}',
+        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"},"jurisdictionCode":"","purposes":{"coreprodserv":{"allowed":"true","legalBasisCode":"legitimateinterest"},"prodservenhance":{"allowed":"true","legalBasisCode":"consent_optin"},"hschat":{"allowed":"false","legalBasisCode":"consent_optin"},"bizsiteanalytics":{"allowed":"false","legalBasisCode":"consent_optin"},"persads":{"allowed":"false","legalBasisCode":"consent_optin"},"personzation":{"allowed":"false","legalBasisCode":"consent_optin"}}}',
         credentials: 'omit',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         method: 'POST',
