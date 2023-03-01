@@ -6,6 +6,11 @@ import {
   GetFullConfigurationRequest,
   GetLocationResponse,
   GetPreferenceQRRequest,
+  GetSubscriptionConfigurationRequest,
+  GetSubscriptionConfigurationResponse,
+  GetSubscriptionsRequest,
+  GetSubscriptionsResponse,
+  SetSubscriptionsRequest,
   InvokeRightRequest,
   SetConsentRequest,
   WebReportRequest,
@@ -62,6 +67,20 @@ export class KetchWebAPI {
   }
 
   /**
+   * Gets the subscriptions configuration for the specified parameters.
+   *
+   * @param request The configuration request
+   */
+  async getSubscriptionsConfiguration(
+    request: GetSubscriptionConfigurationRequest,
+  ): Promise<GetSubscriptionConfigurationResponse> {
+    const resp = await this.get(
+      `/config/${request.organizationCode}/${request.propertyCode}/${request.languageCode}/subscriptions.json`,
+    )
+    return resp as GetSubscriptionConfigurationResponse
+  }
+
+  /**
    *  Gets the current state of the user's consent flags.
    *
    * @param request The user consent request
@@ -78,6 +97,25 @@ export class KetchWebAPI {
    */
   async setConsent(request: SetConsentRequest): Promise<void> {
     await this.post(`/consent/${request.organizationCode}/update`, request)
+  }
+
+  /**
+   *  Gets the current state of the user's Subscriptions.
+   *
+   * @param request The user's Subscription request
+   */
+  async getSubscriptions(request: GetSubscriptionsRequest): Promise<GetSubscriptionsResponse> {
+    const resp = await this.post(`/subscriptions/${request.organizationCode}/get`, request)
+    return resp as GetSubscriptionsResponse
+  }
+
+  /**
+   * Sets the user's Subscriptions.
+   *
+   * @param request The user's Subscriptions request
+   */
+  async setSubscriptions(request: SetSubscriptionsRequest): Promise<void> {
+    await this.post(`/subscriptions/${request.organizationCode}/update`, request)
   }
 
   /**

@@ -97,6 +97,30 @@ describe('@ketch-com/ketch-web-api', () => {
     })
   })
 
+  describe('GetSubscriptionConfiguration', () => {
+    it('calls service', () => {
+      const v = {
+        identities: {},
+        controls: [],
+        topics: [],
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        api.getSubscriptionsConfiguration({
+          languageCode: 'en-US',
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'foo',
+        }),
+      ).resolves.toStrictEqual(v)
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/en-US/subscriptions.json',
+        getOptions,
+      )
+    })
+  })
+
   describe('GetConsent', () => {
     it('calls service', () => {
       const v = {
@@ -205,6 +229,75 @@ describe('@ketch-com/ketch-web-api', () => {
       }
 
       expect(mockFetch).toHaveBeenCalledWith('https://global.ketchcdn.com/web/v2/consent/switchbitcorp/update', options)
+    })
+  })
+
+  describe('GetSubscriptions', () => {
+    it('calls service', () => {
+      const v = {
+        topics: {
+          coreprodserv: {
+            status: 'granted',
+          },
+        },
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        api.getSubscriptions({
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'switchbit',
+          environmentCode: 'production',
+          identities: {
+            swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+          },
+        }),
+      ).resolves.toStrictEqual(v)
+
+      const options = {
+        /*eslint-disable max-len*/
+        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"}}',
+        credentials: 'omit',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      }
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v2/subscriptions/switchbitcorp/get',
+        options,
+      )
+    })
+  })
+
+  describe('SetSubscriptions', () => {
+    it('calls service', () => {
+      mockFetch.mockResponseOnce(JSON.stringify({}))
+
+      expect(
+        api.setSubscriptions({
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'switchbit',
+          environmentCode: 'production',
+          identities: {
+            swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+          },
+        }),
+      ).resolves.toBeUndefined()
+
+      const options = {
+        /*eslint-disable max-len*/
+        body: '{"organizationCode":"switchbitcorp","propertyCode":"switchbit","environmentCode":"production","identities":{"swb_switchbit":"2I0tgfvRzAyP7A9ma7Eqo6"}}',
+        credentials: 'omit',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      }
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v2/subscriptions/switchbitcorp/update',
+        options,
+      )
     })
   })
 
