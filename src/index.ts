@@ -7,7 +7,7 @@ import {
   GetLocationResponse,
   GetPreferenceQRRequest,
   GetSubscriptionConfigurationRequest,
-  GetSubscriptionConfigurationResponse,
+  SubscriptionConfiguration,
   GetSubscriptionsRequest,
   GetSubscriptionsResponse,
   SetSubscriptionsRequest,
@@ -73,11 +73,11 @@ export class KetchWebAPI {
    */
   async getSubscriptionsConfiguration(
     request: GetSubscriptionConfigurationRequest,
-  ): Promise<GetSubscriptionConfigurationResponse> {
+  ): Promise<SubscriptionConfiguration> {
     const resp = await this.get(
       `/config/${request.organizationCode}/${request.propertyCode}/${request.languageCode}/subscriptions.json`,
     )
-    return resp as GetSubscriptionConfigurationResponse
+    return resp as SubscriptionConfiguration
   }
 
   /**
