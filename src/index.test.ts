@@ -124,6 +124,7 @@ describe('@ketch-com/ketch-web-api', () => {
   describe('GetConsent', () => {
     it('calls service', () => {
       const v = {
+        organizationCode: 'switchbitcorp',
         purposes: {
           coreprodserv: {
             allowed: 'true',
@@ -174,6 +175,49 @@ describe('@ketch-com/ketch-web-api', () => {
       }
 
       expect(mockFetch).toHaveBeenCalledWith('https://global.ketchcdn.com/web/v2/consent/switchbitcorp/get', options)
+    })
+
+    it('Responds with request payload incase of synthetic response', () => {
+      const v = {
+        purposes: {
+          coreprodserv: {
+            allowed: 'true',
+          },
+        },
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      const reqPayload = {
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: 'default',
+        purposes: {
+          coreprodserv: {
+            legalBasisCode: 'disclosure',
+          },
+          prodservenhance: {
+            legalBasisCode: 'disclosure',
+          },
+          hschat: {
+            legalBasisCode: 'disclosure',
+          },
+          bizsiteanalytics: {
+            legalBasisCode: 'disclosure',
+          },
+          persads: {
+            legalBasisCode: 'disclosure',
+          },
+          personzation: {
+            legalBasisCode: 'disclosure',
+          },
+        },
+      }
+
+      expect(api.getConsent(reqPayload)).resolves.toStrictEqual(reqPayload)
     })
   })
 

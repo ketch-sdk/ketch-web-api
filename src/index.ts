@@ -108,7 +108,7 @@ export class KetchWebAPI {
       await this.post(`/consent/${request.organizationCode}/update`, request)
     } catch (e) {
       // Incase of an unlikely scenario fulfill promise with same value (undefined) when request succeeds
-      return undefined
+      return
     }
   }
 
