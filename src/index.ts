@@ -86,8 +86,16 @@ export class KetchWebAPI {
    * @param request The user consent request
    */
   async getConsent(request: GetConsentRequest): Promise<GetConsentResponse> {
-    const resp = await this.post(`/consent/${request.organizationCode}/get`, request)
-    return resp as GetConsentResponse
+    try {
+      const resp: GetConsentResponse = await this.post(`/consent/${request.organizationCode}/get`, request)
+      if (resp.organizationCode) return resp
+
+      // Return request incase of 204 synthetic response
+      return request as GetConsentResponse
+    } catch (e) {
+      // Incase of an unlikely scenario fulfill promise with request
+      return request as GetConsentResponse
+    }
   }
 
   /**
@@ -96,7 +104,12 @@ export class KetchWebAPI {
    * @param request The use consent request
    */
   async setConsent(request: SetConsentRequest): Promise<void> {
-    await this.post(`/consent/${request.organizationCode}/update`, request)
+    try {
+      await this.post(`/consent/${request.organizationCode}/update`, request)
+    } catch (e) {
+      // Incase of an unlikely scenario fulfill promise with same value (undefined) when request succeeds
+      return undefined
+    }
   }
 
   /**
