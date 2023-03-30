@@ -219,6 +219,41 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(api.getConsent(reqPayload)).resolves.toStrictEqual(reqPayload)
     })
+
+    it('Responds with request payload incase of network error', () => {
+      const reqPayload = {
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: 'default',
+        purposes: {
+          coreprodserv: {
+            legalBasisCode: 'disclosure',
+          },
+          prodservenhance: {
+            legalBasisCode: 'disclosure',
+          },
+          hschat: {
+            legalBasisCode: 'disclosure',
+          },
+          bizsiteanalytics: {
+            legalBasisCode: 'disclosure',
+          },
+          persads: {
+            legalBasisCode: 'disclosure',
+          },
+          personzation: {
+            legalBasisCode: 'disclosure',
+          },
+        },
+      }
+
+      mockFetch.mockRejectOnce(reqPayload => Promise.resolve(reqPayload))
+      expect(api.getConsent(reqPayload)).resolves.toStrictEqual(reqPayload)
+    })
   })
 
   describe('SetConsent', () => {
@@ -273,6 +308,47 @@ describe('@ketch-com/ketch-web-api', () => {
       }
 
       expect(mockFetch).toHaveBeenCalledWith('https://global.ketchcdn.com/web/v2/consent/switchbitcorp/update', options)
+    })
+
+    it('Responds with undefined incase of network error', () => {
+      const reqPayload = {
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: '',
+        purposes: {
+          coreprodserv: {
+            allowed: 'true',
+            legalBasisCode: 'legitimateinterest',
+          },
+          prodservenhance: {
+            allowed: 'true',
+            legalBasisCode: 'consent_optin',
+          },
+          hschat: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          bizsiteanalytics: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          persads: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          personzation: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+        },
+      }
+
+      mockFetch.mockRejectOnce(() => Promise.resolve(undefined))
+      expect(api.setConsent(reqPayload)).resolves.toBeUndefined()
     })
   })
 
