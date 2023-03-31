@@ -179,11 +179,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
     it('Responds with request payload incase of synthetic response', () => {
       const v = {
-        purposes: {
-          coreprodserv: {
-            allowed: 'true',
-          },
-        },
+        purposes: {},
       }
       mockFetch.mockResponseOnce(JSON.stringify(v))
 
