@@ -88,7 +88,7 @@ export class KetchWebAPI {
   async getConsent(request: GetConsentRequest): Promise<GetConsentResponse> {
     try {
       const resp: GetConsentResponse = await this.post(`/consent/${request.organizationCode}/get`, request)
-      if (resp && resp.organizationCode) return resp
+      if (resp && resp.purposes && Object.keys(resp.purposes).length) return resp
 
       // Return request incase of 204 synthetic response
       return request as GetConsentResponse
