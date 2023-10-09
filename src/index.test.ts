@@ -440,7 +440,7 @@ describe('@ketch-com/ketch-web-api', () => {
             description: 'Ignore me',
           },
         }),
-      ).resolves.toBeUndefined()
+      ).resolves.toStrictEqual({})
 
       const options = {
         /*eslint-disable max-len*/
