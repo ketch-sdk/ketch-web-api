@@ -183,7 +183,13 @@ export class KetchWebAPI {
   }
 
   private async post(url: string, request: any): Promise<any> {
-    return fetch(this._baseUrl + url, this.fetchOptions('POST', request)).then(x => x.json())
+    const response = await fetch(this._baseUrl + url, this.fetchOptions('POST', request))
+
+    if (!response.ok) {
+      throw new Error(await response.text())
+    }
+
+    return response.json()
   }
 
   private fetchOptions(method: string, body?: any): RequestInit {
