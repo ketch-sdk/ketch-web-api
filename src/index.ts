@@ -136,8 +136,8 @@ export class KetchWebAPI {
    *
    * @param request The request to invoke.
    */
-  async invokeRight(request: InvokeRightRequest): Promise<void> {
-    await this.post(`/rights/${request.organizationCode}/invoke`, request)
+  async invokeRight(request: InvokeRightRequest): Promise<any> {
+    return await this.post(`/rights/${request.organizationCode}/invoke`, request)
   }
 
   /**
