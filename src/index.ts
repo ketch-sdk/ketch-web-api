@@ -22,13 +22,17 @@ import {
 export class KetchWebAPI {
   private readonly _baseUrl: string
 
+  private readonly _fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
+
   /**
    * Create a new KetchWebAPI with the given base url
    *
    * @param baseUrl The base url of the Ketch Web API
+   * @param fetchOverride To use a different fetch to [native Fetch API](https://mdn.io/fetch)
    */
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, fetchOverride?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) {
     this._baseUrl = baseUrl
+    this._fetch = fetchOverride || global.fetch
   }
 
   /**
@@ -179,11 +183,11 @@ export class KetchWebAPI {
   }
 
   private async get(url: string): Promise<any> {
-    return fetch(this._baseUrl + url, this.fetchOptions('GET')).then(x => x.json())
+    return this._fetch(this._baseUrl + url, this.fetchOptions('GET')).then(x => x.json())
   }
 
   private async post(url: string, request: any): Promise<any> {
-    const response = await fetch(this._baseUrl + url, this.fetchOptions('POST', request))
+    const response = await this._fetch(this._baseUrl + url, this.fetchOptions('POST', request))
 
     if (!response.ok) {
       throw new Error(await response.text())
