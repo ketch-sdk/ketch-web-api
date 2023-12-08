@@ -111,11 +111,12 @@ describe('@ketch-com/ketch-web-api', () => {
           languageCode: 'en-US',
           organizationCode: 'switchbitcorp',
           propertyCode: 'foo',
+          experienceCode: 'bar',
         }),
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/en-US/subscriptions.json',
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/en-US/bar/subscriptions.json',
         getOptions,
       )
     })
