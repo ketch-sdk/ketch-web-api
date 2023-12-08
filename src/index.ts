@@ -78,9 +78,13 @@ export class KetchWebAPI {
   async getSubscriptionsConfiguration(
     request: GetSubscriptionConfigurationRequest,
   ): Promise<SubscriptionConfiguration> {
-    const resp = await this.get(
-      `/config/${request.organizationCode}/${request.propertyCode}/${request.languageCode}/${request.experienceCode}/subscriptions.json`,
-    )
+    const {
+      organizationCode: orgCode,
+      propertyCode: propCode,
+      languageCode: langCode,
+      experienceCode: expCode,
+    } = request
+    const resp = await this.get(`/config/${orgCode}/${propCode}/${langCode}/${expCode}/subscriptions.json`)
     return resp as SubscriptionConfiguration
   }
 
