@@ -32,7 +32,7 @@ export class KetchWebAPI {
    */
   constructor(baseUrl: string, fetchOverride?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) {
     this._baseUrl = baseUrl
-    this._fetch = fetchOverride || global.fetch
+    this._fetch = fetchOverride || global.fetch.bind(window)
   }
 
   /**
