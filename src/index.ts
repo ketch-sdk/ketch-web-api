@@ -104,7 +104,7 @@ export class KetchWebAPI {
     hash,
   }: GetConsentConfigurationV2Request): Promise<ConfigurationV2> {
     const resp = await this.get(
-      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/consent.json${!!hash ? `?hash=${hash}` : ''}`,
+      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/consent.json${hash ? `?hash=${hash}` : ''}`,
     )
     return resp as ConfigurationV2
   }
@@ -122,7 +122,7 @@ export class KetchWebAPI {
     hash,
   }: GetPreferenceConfigurationV2Request): Promise<ConfigurationV2> {
     const resp = await this.get(
-      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/preference.json${!!hash ? `?hash=${hash}` : ''}`,
+      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/preference.json${hash ? `?hash=${hash}` : ''}`,
     )
     return resp as ConfigurationV2
   }
