@@ -1,4 +1,5 @@
 /* eslint-disable jest/valid-expect */
+import { ConfigurationV2 } from '@ketch-sdk/ketch-types'
 import { KetchWebAPI } from './index'
 import mockFetch from 'jest-fetch-mock'
 
@@ -117,6 +118,60 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(mockFetch).toHaveBeenCalledWith(
         'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/en-US/bar/subscriptions.json',
+        getOptions,
+      )
+    })
+  })
+
+  describe('GetConsentConfigurationV2', () => {
+    it('calls service', () => {
+      const v: ConfigurationV2 = {
+        organization: {
+          code: 'switchbitcorp',
+        },
+        formTemplates: [],
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        api.getConsentConfigurationV2({
+          propertyCode: 'foo',
+          envCode: 'test',
+          jurisdictionCode: 'bar',
+          langCode: 'en-US',
+          hash: 'baz',
+        }),
+      ).resolves.toStrictEqual(v)
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/consent.json?hash=baz',
+        getOptions,
+      )
+    })
+  })
+
+  describe('GetPreferenceConfigurationV2', () => {
+    it('calls service', () => {
+      const v: ConfigurationV2 = {
+        organization: {
+          code: 'switchbitcorp',
+        },
+        formTemplates: [],
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        api.getPreferenceConfigurationV2({
+          propertyCode: 'foo',
+          envCode: 'test',
+          jurisdictionCode: 'bar',
+          langCode: 'en-US',
+          hash: 'baz',
+        }),
+      ).resolves.toStrictEqual(v)
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/preference.json?hash=baz',
         getOptions,
       )
     })
