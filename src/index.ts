@@ -14,6 +14,9 @@ import {
   InvokeRightRequest,
   SetConsentRequest,
   WebReportRequest,
+  ConfigurationV2,
+  GetConsentConfigurationV2Request,
+  GetPreferenceConfigurationV2Request,
 } from '@ketch-sdk/ketch-types'
 
 /**
@@ -86,6 +89,42 @@ export class KetchWebAPI {
     } = request
     const resp = await this.get(`/config/${orgCode}/${propCode}/${langCode}/${expCode}/subscriptions.json`)
     return resp as SubscriptionConfiguration
+  }
+
+  /**
+   * Gets a v2 configuration, containing only consent experience information, for the specified parameters.
+   *
+   * @param request The configuration request
+   */
+  async getConsentConfigurationV2({
+    propertyCode,
+    envCode,
+    jurisdictionCode,
+    langCode,
+    hash,
+  }: GetConsentConfigurationV2Request): Promise<ConfigurationV2> {
+    const resp = await this.get(
+      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/consent.json${!!hash ? `?hash=${hash}` : ''}`,
+    )
+    return resp as ConfigurationV2
+  }
+
+  /**
+   * Gets a v2 configuration, containing only preference experience information, for the specified parameters.
+   *
+   * @param request The configuration request
+   */
+  async getPreferenceConfigurationV2({
+    propertyCode,
+    envCode,
+    jurisdictionCode,
+    langCode,
+    hash,
+  }: GetPreferenceConfigurationV2Request): Promise<ConfigurationV2> {
+    const resp = await this.get(
+      `/${propertyCode}/${envCode}/${jurisdictionCode}/${langCode}/preference.json${!!hash ? `?hash=${hash}` : ''}`,
+    )
+    return resp as ConfigurationV2
   }
 
   /**
