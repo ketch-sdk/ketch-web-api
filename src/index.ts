@@ -96,7 +96,7 @@ export class KetchWebAPI {
    *
    * @param request The configuration request
    */
-  async getConsentConfigurationV2({
+  async getConsentConfiguration({
     propertyCode,
     envCode,
     jurisdictionCode,
@@ -114,7 +114,7 @@ export class KetchWebAPI {
    *
    * @param request The configuration request
    */
-  async getPreferenceConfigurationV2({
+  async getPreferenceConfiguration({
     propertyCode,
     envCode,
     jurisdictionCode,
