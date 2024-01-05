@@ -123,7 +123,7 @@ describe('@ketch-com/ketch-web-api', () => {
     })
   })
 
-  describe('GetConsentConfigurationV2 - With hash', () => {
+  describe('GetConsentConfiguration - With hash', () => {
     it('calls service', () => {
       const v: ConfigurationV2 = {
         organization: {
@@ -134,7 +134,7 @@ describe('@ketch-com/ketch-web-api', () => {
       mockFetch.mockResponseOnce(JSON.stringify(v))
 
       expect(
-        api.getConsentConfigurationV2({
+        api.getConsentConfiguration({
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -150,7 +150,7 @@ describe('@ketch-com/ketch-web-api', () => {
     })
   })
 
-  describe('GetConsentConfigurationV2 - Without hash', () => {
+  describe('GetConsentConfiguration - Without hash', () => {
     it('calls service', () => {
       const v: ConfigurationV2 = {
         organization: {
@@ -161,7 +161,7 @@ describe('@ketch-com/ketch-web-api', () => {
       mockFetch.mockResponseOnce(JSON.stringify(v))
 
       expect(
-        api.getConsentConfigurationV2({
+        api.getConsentConfiguration({
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -176,7 +176,7 @@ describe('@ketch-com/ketch-web-api', () => {
     })
   })
 
-  describe('GetPreferenceConfigurationV2 - With hash', () => {
+  describe('GetPreferenceConfiguration - With hash', () => {
     it('calls service', () => {
       const v: ConfigurationV2 = {
         organization: {
@@ -187,7 +187,7 @@ describe('@ketch-com/ketch-web-api', () => {
       mockFetch.mockResponseOnce(JSON.stringify(v))
 
       expect(
-        api.getPreferenceConfigurationV2({
+        api.getPreferenceConfiguration({
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -203,7 +203,7 @@ describe('@ketch-com/ketch-web-api', () => {
     })
   })
 
-  describe('GetPreferenceConfigurationV2 - Without hash', () => {
+  describe('GetPreferenceConfiguration - Without hash', () => {
     it('calls service', () => {
       const v: ConfigurationV2 = {
         organization: {
@@ -214,7 +214,7 @@ describe('@ketch-com/ketch-web-api', () => {
       mockFetch.mockResponseOnce(JSON.stringify(v))
 
       expect(
-        api.getPreferenceConfigurationV2({
+        api.getPreferenceConfiguration({
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
