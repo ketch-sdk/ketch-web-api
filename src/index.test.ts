@@ -135,6 +135,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(
         api.getConsentConfiguration({
+          organizationCode: 'switchbitcorp',
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -144,7 +145,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/consent.json?hash=baz',
+        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/consent.json?hash=baz',
         getOptions,
       )
     })
@@ -162,6 +163,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(
         api.getConsentConfiguration({
+          organizationCode: 'switchbitcorp',
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -170,7 +172,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/consent.json',
+        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/consent.json',
         getOptions,
       )
     })
@@ -188,6 +190,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(
         api.getPreferenceConfiguration({
+          organizationCode: 'switchbitcorp',
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -197,7 +200,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/preference.json?hash=baz',
+        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/preference.json?hash=baz',
         getOptions,
       )
     })
@@ -215,6 +218,7 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(
         api.getPreferenceConfiguration({
+          organizationCode: 'switchbitcorp',
           propertyCode: 'foo',
           envCode: 'test',
           jurisdictionCode: 'bar',
@@ -223,7 +227,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/foo/test/bar/en-US/preference.json',
+        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/preference.json',
         getOptions,
       )
     })
