@@ -145,7 +145,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/consent.json?hash=baz',
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/test/bar/en-US/consent.json?hash=baz',
         getOptions,
       )
     })
@@ -172,7 +172,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/consent.json',
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/test/bar/en-US/consent.json',
         getOptions,
       )
     })
@@ -200,7 +200,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/preference.json?hash=baz',
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/test/bar/en-US/preference.json?hash=baz',
         getOptions,
       )
     })
@@ -227,7 +227,7 @@ describe('@ketch-com/ketch-web-api', () => {
       ).resolves.toStrictEqual(v)
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'https://global.ketchcdn.com/web/v2/switchbitcorp/foo/test/bar/en-US/preference.json',
+        'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/test/bar/en-US/preference.json',
         getOptions,
       )
     })
