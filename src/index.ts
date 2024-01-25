@@ -71,7 +71,11 @@ export class KetchWebAPI {
       }
 
       // eslint-disable-next-line max-len
-      const resp = await this.get(`/config/${request.organizationCode}/${request.propertyCode}${fullDetails}/config.json${request.hash ? `?hash=${request.hash}` : ''}`)
+      const resp = await this.get(
+        `/config/${request.organizationCode}/${request.propertyCode}${fullDetails}/config.json${
+          request.hash ? `?hash=${request.hash}` : ''
+        }`,
+      )
       return resp as Configuration
     }
 
