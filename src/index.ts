@@ -65,6 +65,17 @@ export class KetchWebAPI {
   async getFullConfiguration(request: GetFullConfigurationRequest): Promise<Configuration> {
     let fullDetails = ''
 
+    if (this._baseUrl.includes('web/v3')) {
+      if (request.environmentCode && request.jurisdictionCode && request.languageCode) {
+        fullDetails = `/${request.environmentCode}/${request.jurisdictionCode}/${request.languageCode}`
+      }
+
+      const resp = await this.get(`/config/${request.organizationCode}/${request.propertyCode}${fullDetails}
+        /config.json${request.hash ? `?hash=${request.hash}` : ''}`)
+      return resp as Configuration
+    }
+
+    // TODO remove when all clients web/v3
     if (request.environmentCode && request.hash && request.jurisdictionCode && request.languageCode) {
       fullDetails = `/${request.environmentCode}/${request.hash}/${request.jurisdictionCode}/${request.languageCode}`
     }
