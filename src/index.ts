@@ -70,8 +70,8 @@ export class KetchWebAPI {
         fullDetails = `/${request.environmentCode}/${request.jurisdictionCode}/${request.languageCode}`
       }
 
-      const resp = await this.get(`/config/${request.organizationCode}/${request.propertyCode}${fullDetails}
-        /config.json${request.hash ? `?hash=${request.hash}` : ''}`)
+      // eslint-disable-next-line max-len
+      const resp = await this.get(`/config/${request.organizationCode}/${request.propertyCode}${fullDetails}/config.json${request.hash ? `?hash=${request.hash}` : ''}`)
       return resp as Configuration
     }
 

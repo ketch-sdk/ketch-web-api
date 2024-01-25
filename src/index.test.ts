@@ -13,6 +13,9 @@ const baseUrl = 'https://global.ketchcdn.com/web/v2'
 const api = new KetchWebAPI(baseUrl)
 const getOptions = { credentials: 'omit', headers: { Accept: 'application/json' }, method: 'GET', mode: 'cors' }
 
+const baseUrlV3 = 'https://global.ketchcdn.com/web/v3'
+const apiV3 = new KetchWebAPI(baseUrlV3)
+
 describe('@ketch-com/ketch-web-api', () => {
   describe('GetLocation', () => {
     it('calls service', () => {
@@ -93,6 +96,54 @@ describe('@ketch-com/ketch-web-api', () => {
 
       expect(mockFetch).toHaveBeenCalledWith(
         'https://global.ketchcdn.com/web/v2/config/switchbitcorp/foo/config.json',
+        getOptions,
+      )
+    })
+  })
+
+  describe('GetFullConfigurationV3', () => {
+    it('calls service for full configuration', () => {
+      const v = {
+        language: 'en-US',
+        regulations: ['gdpr'],
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        apiV3.getFullConfiguration({
+          languageCode: 'en-US',
+          hash: '8913461971881236311',
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'foo',
+          environmentCode: 'foo',
+          deploymentID: '',
+          jurisdictionCode: 'foo',
+        }),
+      ).resolves.toStrictEqual(v)
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        // eslint-disable-next-line max-len
+        'https://global.ketchcdn.com/web/v3/config/switchbitcorp/foo/foo/foo/en-US/config.json?hash=8913461971881236311',
+        getOptions,
+      )
+    })
+
+    it('calls service for dynamic configuration', () => {
+      const v = {
+        language: 'en-US',
+        regulations: ['gdpr'],
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
+
+      expect(
+        apiV3.getFullConfiguration({
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'foo',
+        }),
+      ).resolves.toStrictEqual(v)
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://global.ketchcdn.com/web/v3/config/switchbitcorp/foo/config.json',
         getOptions,
       )
     })
