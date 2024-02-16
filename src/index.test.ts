@@ -417,6 +417,42 @@ describe('@ketch-com/ketch-web-api', () => {
 
   describe('SetConsent', () => {
     it('calls service', () => {
+      const payload = {
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: '',
+        purposes: {
+          coreprodserv: {
+            allowed: 'true',
+            legalBasisCode: 'legitimateinterest',
+          },
+          prodservenhance: {
+            allowed: 'true',
+            legalBasisCode: 'consent_optin',
+          },
+          hschat: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          bizsiteanalytics: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          persads: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          personzation: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+        },
+      }
+
       mockFetch.mockResponseOnce(
         JSON.stringify({
           organizationCode: 'switchbitcorp',
@@ -454,78 +490,7 @@ describe('@ketch-com/ketch-web-api', () => {
           },
         }),
       )
-
-      expect(
-        api.setConsent({
-          organizationCode: 'switchbitcorp',
-          propertyCode: 'switchbit',
-          environmentCode: 'production',
-          identities: {
-            swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
-          },
-          jurisdictionCode: '',
-          purposes: {
-            coreprodserv: {
-              allowed: 'true',
-              legalBasisCode: 'legitimateinterest',
-            },
-            prodservenhance: {
-              allowed: 'true',
-              legalBasisCode: 'consent_optin',
-            },
-            hschat: {
-              allowed: 'false',
-              legalBasisCode: 'consent_optin',
-            },
-            bizsiteanalytics: {
-              allowed: 'false',
-              legalBasisCode: 'consent_optin',
-            },
-            persads: {
-              allowed: 'false',
-              legalBasisCode: 'consent_optin',
-            },
-            personzation: {
-              allowed: 'false',
-              legalBasisCode: 'consent_optin',
-            },
-          },
-        }),
-      ).resolves.toStrictEqual({
-        organizationCode: 'switchbitcorp',
-        propertyCode: 'switchbit',
-        environmentCode: 'production',
-        identities: {
-          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
-        },
-        jurisdictionCode: '',
-        purposes: {
-          coreprodserv: {
-            allowed: 'true',
-            legalBasisCode: 'legitimateinterest',
-          },
-          prodservenhance: {
-            allowed: 'true',
-            legalBasisCode: 'consent_optin',
-          },
-          hschat: {
-            allowed: 'false',
-            legalBasisCode: 'consent_optin',
-          },
-          bizsiteanalytics: {
-            allowed: 'false',
-            legalBasisCode: 'consent_optin',
-          },
-          persads: {
-            allowed: 'false',
-            legalBasisCode: 'consent_optin',
-          },
-          personzation: {
-            allowed: 'false',
-            legalBasisCode: 'consent_optin',
-          },
-        },
-      })
+      expect(api.setConsent(payload)).resolves.toStrictEqual(payload)
 
       const options = {
         /*eslint-disable max-len*/
@@ -539,7 +504,11 @@ describe('@ketch-com/ketch-web-api', () => {
       expect(mockFetch).toHaveBeenCalledWith('https://global.ketchcdn.com/web/v2/consent/switchbitcorp/update', options)
     })
 
-    it('Responds with undefined incase of network error', () => {
+    it('Responds with request payload incase of synthetic response', () => {
+      const v = {
+        purposes: {},
+      }
+      mockFetch.mockResponseOnce(JSON.stringify(v))
       const reqPayload = {
         organizationCode: 'switchbitcorp',
         propertyCode: 'switchbit',
@@ -576,8 +545,48 @@ describe('@ketch-com/ketch-web-api', () => {
         },
       }
 
-      mockFetch.mockRejectOnce(() => Promise.resolve(reqPayload))
-      expect(api.setConsent(reqPayload)).resolves.toBe(reqPayload)
+      expect(api.setConsent(reqPayload)).resolves.toStrictEqual(reqPayload)
+    })
+
+    it('Responds with request payload incase of network error', () => {
+      const reqPayload = {
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: '',
+        purposes: {
+          coreprodserv: {
+            allowed: 'true',
+            legalBasisCode: 'legitimateinterest',
+          },
+          prodservenhance: {
+            allowed: 'true',
+            legalBasisCode: 'consent_optin',
+          },
+          hschat: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          bizsiteanalytics: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          persads: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          personzation: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+        },
+      }
+
+      mockFetch.mockRejectOnce(reqPayload => Promise.resolve(reqPayload))
+      expect(api.setConsent(reqPayload)).resolves.toStrictEqual(reqPayload)
     })
   })
 
