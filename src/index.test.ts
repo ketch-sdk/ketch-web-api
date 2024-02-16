@@ -417,7 +417,43 @@ describe('@ketch-com/ketch-web-api', () => {
 
   describe('SetConsent', () => {
     it('calls service', () => {
-      mockFetch.mockResponseOnce(JSON.stringify({}))
+      mockFetch.mockResponseOnce(
+        JSON.stringify({
+          organizationCode: 'switchbitcorp',
+          propertyCode: 'switchbit',
+          environmentCode: 'production',
+          identities: {
+            swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+          },
+          jurisdictionCode: '',
+          purposes: {
+            coreprodserv: {
+              allowed: 'true',
+              legalBasisCode: 'legitimateinterest',
+            },
+            prodservenhance: {
+              allowed: 'true',
+              legalBasisCode: 'consent_optin',
+            },
+            hschat: {
+              allowed: 'false',
+              legalBasisCode: 'consent_optin',
+            },
+            bizsiteanalytics: {
+              allowed: 'false',
+              legalBasisCode: 'consent_optin',
+            },
+            persads: {
+              allowed: 'false',
+              legalBasisCode: 'consent_optin',
+            },
+            personzation: {
+              allowed: 'false',
+              legalBasisCode: 'consent_optin',
+            },
+          },
+        }),
+      )
 
       expect(
         api.setConsent({
@@ -455,7 +491,41 @@ describe('@ketch-com/ketch-web-api', () => {
             },
           },
         }),
-      ).resolves.toBeUndefined()
+      ).resolves.toStrictEqual({
+        organizationCode: 'switchbitcorp',
+        propertyCode: 'switchbit',
+        environmentCode: 'production',
+        identities: {
+          swb_switchbit: '2I0tgfvRzAyP7A9ma7Eqo6',
+        },
+        jurisdictionCode: '',
+        purposes: {
+          coreprodserv: {
+            allowed: 'true',
+            legalBasisCode: 'legitimateinterest',
+          },
+          prodservenhance: {
+            allowed: 'true',
+            legalBasisCode: 'consent_optin',
+          },
+          hschat: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          bizsiteanalytics: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          persads: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+          personzation: {
+            allowed: 'false',
+            legalBasisCode: 'consent_optin',
+          },
+        },
+      })
 
       const options = {
         /*eslint-disable max-len*/
@@ -506,8 +576,8 @@ describe('@ketch-com/ketch-web-api', () => {
         },
       }
 
-      mockFetch.mockRejectOnce(() => Promise.resolve(undefined))
-      expect(api.setConsent(reqPayload)).resolves.toBeUndefined()
+      mockFetch.mockRejectOnce(() => Promise.resolve(reqPayload))
+      expect(api.setConsent(reqPayload)).resolves.toBe(reqPayload)
     })
   })
 
