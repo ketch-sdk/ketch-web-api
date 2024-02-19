@@ -17,6 +17,7 @@ import {
   ConfigurationV2,
   GetConsentConfigurationV2Request,
   GetPreferenceConfigurationV2Request,
+  SetConsentResponse,
 } from '@ketch-sdk/ketch-types'
 
 /**
@@ -171,12 +172,16 @@ export class KetchWebAPI {
    *
    * @param request The use consent request
    */
-  async setConsent(request: SetConsentRequest): Promise<void> {
+  async setConsent(request: SetConsentRequest): Promise<SetConsentResponse> {
     try {
-      await this.post(`/consent/${request.organizationCode}/update`, request)
+      const resp: SetConsentResponse = await this.post(`/consent/${request.organizationCode}/update`, request)
+      if (resp && resp.purposes && Object.keys(resp.purposes).length) return resp
+
+      // Return request incase of 204 synthetic response
+      return request as SetConsentResponse
     } catch (e) {
-      // Incase of an unlikely scenario fulfill promise with same value (undefined) when request succeeds
-      return
+      // Incase of an unlikely scenario fulfill promise with request
+      return request as SetConsentResponse
     }
   }
 
