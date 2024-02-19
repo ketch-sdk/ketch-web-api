@@ -24,7 +24,7 @@
     "url": "https://github.com/ketch-sdk/ketch-web-api/issues"
   },
   "devDependencies": {
-    "@ketch-sdk/ketch-types": "^1.36.1",
+    "@ketch-sdk/ketch-types": "^1.36.2",
     "@types/jest": "^29.5.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
