@@ -42,7 +42,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@ketch-sdk/ketch-types": "^1.36.1",
+    "@ketch-sdk/ketch-types": "^1.36.2",
     "tslib": "^2.5.0"
   },
   "files": [
